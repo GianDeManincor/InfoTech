@@ -33,14 +33,14 @@ public class TelaInicial extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenu6 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         jMenu3.setText("File");
         jMenuBar2.add(jMenu3);
@@ -53,19 +53,6 @@ public class TelaInicial extends javax.swing.JFrame {
         jButton1.setText("jButton1");
 
         jMenu1.setText("Manutenção");
-
-        jMenu6.setText("Cliente");
-
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
-        jMenuItem1.setText("Cadastrar");
-        jMenuItem1.setToolTipText("");
-        jMenu6.add(jMenuItem1);
-
-        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
-        jMenuItem2.setText("Consultar");
-        jMenu6.add(jMenuItem2);
-
-        jMenu1.add(jMenu6);
 
         jMenu7.setText("Produto");
 
@@ -91,6 +78,19 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jMenu5.setText("Ajuda");
         jMenuBar1.add(jMenu5);
+
+        jMenu6.setText("Cliente");
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        jMenuItem1.setText("Cadastrar");
+        jMenuItem1.setToolTipText("");
+        jMenu6.add(jMenuItem1);
+
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        jMenuItem2.setText("Consultar");
+        jMenu6.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu6);
 
         setJMenuBar(jMenuBar1);
 
