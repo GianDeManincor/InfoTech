@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.infotech.views;
+package com.mycompany.infotech.views.cliente;
 
 import java.awt.Color;
 
@@ -53,7 +53,7 @@ public class ConsultaCliente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
-        btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/infotech/views/iconPesquisar.png"))); // NOI18N
+        btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/infotech/views/images/iconPesquisar.png"))); // NOI18N
         btnPesquisar.setText("Pesquisar");
         btnPesquisar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
