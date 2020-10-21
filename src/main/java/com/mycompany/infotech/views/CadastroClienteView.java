@@ -5,6 +5,8 @@
  */
 package com.mycompany.infotech.views;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ateos
@@ -380,6 +382,15 @@ public class CadastroClienteView extends javax.swing.JFrame {
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         
+        if(txtNome.getText().trim().equals("")
+                    || txtCPF.getText().trim().equals("") 
+                    || txtEmail.getText().trim().equals("") 
+                    || txtEndereco.getText().trim().equals("")  
+                    && (radFeminino.getText().trim().equals("") && radMasculino.getText().trim().equals(""))){
+            JOptionPane.showMessageDialog(null, "preencha todos os campos");
+        } else {
+            JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
+        }
         
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
