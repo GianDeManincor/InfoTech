@@ -5,6 +5,11 @@
  */
 package com.mycompany.infotech.views;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Icaro
@@ -46,17 +51,18 @@ public class VIew_CadastroProduto extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        txt_CNPF = new javax.swing.JFormattedTextField();
+        txt_CNPJ = new javax.swing.JFormattedTextField();
         txt_valor_venda = new javax.swing.JTextField();
         txt_volor_compra = new javax.swing.JTextField();
         txt_qtd = new javax.swing.JTextField();
         txt_eamil = new javax.swing.JTextField();
-        txt_contato = new javax.swing.JTextField();
         txt_nome_fornecedor = new javax.swing.JTextField();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        txt_data = new javax.swing.JFormattedTextField();
+        txt_contato = new javax.swing.JFormattedTextField();
         jPanel3 = new javax.swing.JPanel();
-        btn_Alterar = new javax.swing.JButton();
+        btn_limpra = new javax.swing.JButton();
         btn_Salvar = new javax.swing.JButton();
+        btn_cancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -150,15 +156,19 @@ public class VIew_CadastroProduto extends javax.swing.JFrame {
         jLabel12.setText("Data de Aquisição");
 
         try {
-            txt_CNPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###/####-##")));
+            txt_CNPJ.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###/####-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
 
-        txt_contato.setToolTipText("");
+        try {
+            txt_data.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         try {
-            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            txt_contato.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("+## ## #####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -181,13 +191,13 @@ public class VIew_CadastroProduto extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txt_nome_fornecedor)
-                    .addComponent(txt_CNPF, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                    .addComponent(txt_CNPJ, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
                     .addComponent(txt_valor_venda)
                     .addComponent(txt_volor_compra)
                     .addComponent(txt_qtd)
                     .addComponent(txt_eamil)
-                    .addComponent(txt_contato)
-                    .addComponent(jFormattedTextField1))
+                    .addComponent(txt_data)
+                    .addComponent(txt_contato))
                 .addGap(14, 14, 14))
         );
         jPanel2Layout.setVerticalGroup(
@@ -201,12 +211,12 @@ public class VIew_CadastroProduto extends javax.swing.JFrame {
                     .addComponent(txt_nome_fornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_CNPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_CNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_contato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
+                    .addComponent(jLabel7)
+                    .addComponent(txt_contato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_eamil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -226,14 +236,14 @@ public class VIew_CadastroProduto extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        btn_Alterar.setText("Alterar");
-        btn_Alterar.addActionListener(new java.awt.event.ActionListener() {
+        btn_limpra.setText("Limpra campos");
+        btn_limpra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_AlterarActionPerformed(evt);
+                btn_limpraActionPerformed(evt);
             }
         });
 
@@ -244,6 +254,8 @@ public class VIew_CadastroProduto extends javax.swing.JFrame {
             }
         });
 
+        btn_cancelar.setText("cancelar");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -252,8 +264,10 @@ public class VIew_CadastroProduto extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addComponent(btn_Salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btn_Alterar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btn_limpra, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,7 +275,8 @@ public class VIew_CadastroProduto extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_Salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_Alterar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_limpra, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -293,20 +308,136 @@ public class VIew_CadastroProduto extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AlterarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_AlterarActionPerformed
+    private void btn_limpraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpraActionPerformed
+        limpra();
+    }//GEN-LAST:event_btn_limpraActionPerformed
 
     private void btn_SalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalvarActionPerformed
-        // TODO add your handling code here:
+        if (valida()) {
+            JOptionPane.showMessageDialog(null, "sucesso");
+            limpra();
+        }
     }//GEN-LAST:event_btn_SalvarActionPerformed
 
     private void txt_modeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_modeloActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_modeloActionPerformed
-
+    
+    public void limpra(){
+        txt_CNPJ.setText("");
+        txt_contato.setText("");
+        txt_data.setText("");
+        txt_eamil.setText("");
+        txt_especificaçoes.setText("");
+        txt_marca.setText("");
+        txt_modelo.setText("");
+        txt_nome_fornecedor.setText("");
+        txt_nome_produto.setText("");
+        txt_qtd.setText("");
+        txt_valor_venda.setText("");
+        txt_volor_compra.setText("");
+    }
+    
+    public boolean valida(){
+        String[] text = new String[12];
+        text[0] = txt_nome_produto.getText();
+        text[1] = txt_marca.getText();
+        text[2] = txt_modelo.getText();
+        text[3] = txt_especificaçoes.getText();
+        text[4] = txt_nome_fornecedor.getText();
+        text[5] = txt_CNPJ.getText();
+        text[6] = txt_contato.getText();
+        text[7] = txt_eamil.getText();
+        text[8] = txt_qtd.getText();
+        text[9] = txt_volor_compra.getText();
+        text[10] = txt_valor_venda.getText();
+        text[11] = txt_data.getText();
+        
+        for (int i = 0; i < text.length; i++) {
+            if (!campos(i, text[i])) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
+    public boolean campos(int item, String text){
+        String[] linha ={"Nome do Produto","Marca","Modelo","Especificaçoes","Nome do Fornecedor","CNPJ","Contato","E-mail","Quantidade","Valor de Compra","Valor de Venda","Data de Aquisição"};
+        try {       
+            int n;
+            double m;
+            if (text.trim().replace(" ", "").replace("-", "").replace("+", "").replace("/", "").replace(".", "").equals("")) {
+                JOptionPane.showMessageDialog(null, "Preencha o campo "+linha[item]);
+                return false;
+            }else{
+                switch(item){
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 4:    
+                        if (45 >= text.length()) {
+                            return true;
+                        }else{
+                            JOptionPane.showMessageDialog(null, linha[item]+" excedeu o tamanho do campo");
+                            return false;
+                        }
+                    case 3:
+                        if (300 >= text.length()) {
+                            return true;
+                        }else{
+                            JOptionPane.showMessageDialog(null, linha[item]+" excedeu o tamanho do campo");
+                            return false;
+                        }
+                    case 5:
+                        if (14 >= text.replace(".", "").replace("-", "").replace("/", "").length()) {
+                            return true;
+                        }else{
+                            JOptionPane.showMessageDialog(null, linha[item]+" excedeu o tamanho do campo");
+                            return false;
+                        }
+                    case 6:
+                        if (13 >= text.replace(" ", "").replace("+", "").replace("-", "").length()) {
+                            return true;
+                        }else{
+                            JOptionPane.showMessageDialog(null, linha[item]+" excedeu o tamanho do campo");
+                            return false;
+                        }
+                    case 7:
+                        if (50 >= text.length()) {
+                            return true;
+                        }else{
+                            JOptionPane.showMessageDialog(null, linha[item]+" excedeu o tamanho do campo");
+                            return false;
+                        }
+                    case 8:
+                        n = Integer.parseInt(text);
+                        return true;
+                    case 9:
+                    case 10:
+                        m = Double.parseDouble(text.replace(",", "."));
+                        return true;
+                    case 11:
+                        DataFormat(text);
+                        return true;
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, linha[item]+" não pode ser convertido");
+            return false;
+        }
+        return true;
+    }
+    
+    public static String DataFormat(String data) throws ParseException{
+        // dd/MM/yyyy para yyyy/MM/dd
+        Date date = new SimpleDateFormat("dd/MM/yyyy").parse(data);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        return sdf.format(date);
+    }
     /**
      * @param args the command line arguments
      */
@@ -344,9 +475,9 @@ public class VIew_CadastroProduto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_Alterar;
     private javax.swing.JButton btn_Salvar;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
+    private javax.swing.JButton btn_cancelar;
+    private javax.swing.JButton btn_limpra;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -363,8 +494,9 @@ public class VIew_CadastroProduto extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JFormattedTextField txt_CNPF;
-    private javax.swing.JTextField txt_contato;
+    private javax.swing.JFormattedTextField txt_CNPJ;
+    private javax.swing.JFormattedTextField txt_contato;
+    private javax.swing.JFormattedTextField txt_data;
     private javax.swing.JTextField txt_eamil;
     private javax.swing.JTextArea txt_especificaçoes;
     private javax.swing.JTextField txt_marca;
