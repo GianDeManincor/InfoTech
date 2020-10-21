@@ -53,7 +53,6 @@ public class ConsultaClienteView extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
-        btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/infotech/views/images/iconPesquisar.png"))); // NOI18N
         btnPesquisar.setText("Pesquisar");
         btnPesquisar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
