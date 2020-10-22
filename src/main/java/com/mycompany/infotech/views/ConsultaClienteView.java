@@ -5,16 +5,20 @@
  */
 package com.mycompany.infotech.views;
 
-import java.awt.Color;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import javax.swing.JOptionPane;
 
 /**
  *
- * @author ateos
+ * @author Icaro
  */
 public class ConsultaClienteView extends javax.swing.JFrame {
 
     /**
-     * Creates new form ConsultaCliente
+     * Creates new form View_ConsultaClinente
      */
     public ConsultaClienteView() {
         initComponents();
@@ -29,34 +33,44 @@ public class ConsultaClienteView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        txtCPF = new javax.swing.JFormattedTextField();
-        txtNome = new javax.swing.JTextField();
-        btnPesquisar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        btnExcluir = new javax.swing.JButton();
-        btnIncluir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblConsulta = new javax.swing.JTable();
-        btnAlterar = new javax.swing.JButton();
+        jTable1 = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        txt_pesquisa = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        cmb_coluna = new javax.swing.JComboBox<>();
+        btn_busca = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Consulta cliente");
 
-        jLabel2.setText("CPF:");
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
-        try {
-            txtCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        btnPesquisar.setText("Pesquisar");
-        btnPesquisar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jLabel1.setText("Consulta por");
 
-        jLabel1.setText("Nome:");
+        jLabel2.setText("Na Coluna");
+
+        cmb_coluna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Nome", "Data", "Sexo", "CPF", "Cidade", "Estado", "Endereso" }));
+
+        btn_busca.setText("Busca");
+        btn_busca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_buscaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -64,126 +78,133 @@ public class ConsultaClienteView extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 119, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtNome)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(txt_pesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(cmb_coluna, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btn_busca)
+                .addGap(162, 162, 162))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(btnPesquisar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-
-        btnExcluir.setText("Excluir");
-        btnExcluir.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-
-        btnIncluir.setText("Incluir");
-        btnIncluir.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        btnIncluir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIncluirActionPerformed(evt);
-            }
-        });
-
-        tblConsulta.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Nome", "CPF", "ID"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(tblConsulta);
-
-        btnAlterar.setText("Alterar");
-        btnAlterar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAlterar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnIncluir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnExcluir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnIncluir, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txt_pesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(cmb_coluna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_busca))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIncluirActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnIncluirActionPerformed
+    private void btn_buscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscaActionPerformed
+        if (camos(cmb_coluna.getSelectedIndex(), txt_pesquisa.getText())){
+            
+        }
+    }//GEN-LAST:event_btn_buscaActionPerformed
 
+    public boolean camos(int item, String text){
+        try {          
+            //0 ID,1 Nome,2 data,3 Sexo,4 CPF,5 Cidade,6 Estado,7 Endereso
+            int n;
+            if (text.trim().trim().equals("")) {
+                JOptionPane.showMessageDialog(null, "preencha o campo");
+                return false;
+            }else{
+                switch(item){
+                    case 0:
+                        n = Integer.parseInt(text);
+                    break;
+                    case 1:
+                        if (40 >= text.length()){
+                            return true;
+                        }else{
+                            JOptionPane.showMessageDialog(null, "O Nome excedeu o tamanho do campo");
+                            return false;
+                        }
+                    case 2:
+                        DataFormat(text);
+                    break;
+                    case 3:
+                        if ("f".equals(text) || "m".equals(text) || "F".equals(text) || "M".equals(text)) {
+                            return true;
+                        }else{
+                            JOptionPane.showMessageDialog(null, "sexo invalido");
+                            return false;
+                        }
+                    case 4:
+                        if (11 >= text.length()) {
+                            n = Integer.parseInt(text);
+                            return true;
+                        }else{
+                            JOptionPane.showMessageDialog(null, "excedeu o tamanho do CPF");
+                            return false;
+                        }
+                    case 5:
+                        if (20 >= text.length()) {
+                            return true;
+                        }else{
+                            JOptionPane.showMessageDialog(null, "A Cidade excedeu o tamanho do campo");
+                            return false;
+                        }
+                    case 6:
+                        if (2 == text.length()) {
+                            return true;
+                        }else{
+                            JOptionPane.showMessageDialog(null, "Estado: tamanho o invalido");
+                            return false;
+                        }
+                    case 7:
+                        if (40 >= text.length()) {
+                            return true;
+                        }else{
+                            JOptionPane.showMessageDialog(null, "O Endereso excedeu o tamanho do campo");
+                            return false;
+                        }
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, cmb_coluna.getSelectedItem()+" não pode ser convertido");
+            return false;
+        }
+        return true;
+    }
+    
+    public static String DataFormat(String data) throws ParseException{
+        // dd/MM/yyyy para yyyy/MM/dd
+        Date date = new SimpleDateFormat("dd/MM/yyyy").parse(data);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        return sdf.format(date);
+    }
     /**
      * @param args the command line arguments
      */
@@ -211,6 +232,12 @@ public class ConsultaClienteView extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -221,17 +248,13 @@ public class ConsultaClienteView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAlterar;
-    private javax.swing.JButton btnExcluir;
-    private javax.swing.JButton btnIncluir;
-    private javax.swing.JButton btnPesquisar;
+    private javax.swing.JButton btn_busca;
+    private javax.swing.JComboBox<String> cmb_coluna;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblConsulta;
-    private javax.swing.JFormattedTextField txtCPF;
-    private javax.swing.JTextField txtNome;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField txt_pesquisa;
     // End of variables declaration//GEN-END:variables
 }
