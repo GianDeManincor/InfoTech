@@ -41,11 +41,11 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                  <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="jPanel1" max="32767" attributes="0"/>
+                  <Component id="jPanel2" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
@@ -84,9 +84,9 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txt_marca" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txt_nome_produto" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txt_modelo" max="32767" attributes="0"/>
+                              <Component id="txtMarca" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtNome" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txtModelo" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                       </Group>
@@ -103,17 +103,17 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txt_nome_produto" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtNome" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txt_marca" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtMarca" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txt_modelo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtModelo" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
@@ -142,9 +142,9 @@
             <Property name="text" type="java.lang.String" value="Especifica&#xe7;oes"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txt_marca">
+        <Component class="javax.swing.JTextField" name="txtMarca">
         </Component>
-        <Component class="javax.swing.JTextField" name="txt_nome_produto">
+        <Component class="javax.swing.JTextField" name="txtNome">
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
           <AuxValues>
@@ -153,7 +153,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTextArea" name="txt_especifica&#xe7;oes">
+            <Component class="javax.swing.JTextArea" name="txtEspecifica&#xe7;oes">
               <Properties>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="rows" type="int" value="5"/>
@@ -166,9 +166,9 @@
             <Property name="text" type="java.lang.String" value="Modelo"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txt_modelo">
+        <Component class="javax.swing.JTextField" name="txtModelo">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_modeloActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtModeloActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -181,6 +181,9 @@
           </Border>
         </Property>
       </Properties>
+      <AccessibilityProperties>
+        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Dados do Estoque"/>
+      </AccessibilityProperties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -199,14 +202,14 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="txt_nome_fornecedor" max="32767" attributes="0"/>
-                      <Component id="txt_CNPF" pref="131" max="32767" attributes="0"/>
-                      <Component id="txt_valor_venda" max="32767" attributes="0"/>
-                      <Component id="txt_volor_compra" max="32767" attributes="0"/>
-                      <Component id="txt_qtd" max="32767" attributes="0"/>
-                      <Component id="txt_eamil" max="32767" attributes="0"/>
-                      <Component id="txt_contato" max="32767" attributes="0"/>
-                      <Component id="jFormattedTextField1" max="32767" attributes="0"/>
+                      <Component id="txtForneceador" max="32767" attributes="0"/>
+                      <Component id="txtCNPJ" pref="131" max="32767" attributes="0"/>
+                      <Component id="txtValorVenda" max="32767" attributes="0"/>
+                      <Component id="txtValorCompra" max="32767" attributes="0"/>
+                      <Component id="txtQuantidade" max="32767" attributes="0"/>
+                      <Component id="txtEmail" max="32767" attributes="0"/>
+                      <Component id="txtContato" max="32767" attributes="0"/>
+                      <Component id="txtDataAquisicao" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               </Group>
@@ -221,44 +224,44 @@
                           <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
                           <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="txt_nome_fornecedor" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtForneceador" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txt_CNPF" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtCNPJ" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txt_contato" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtContato" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txt_eamil" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtEmail" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txt_qtd" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtQuantidade" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txt_volor_compra" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtValorCompra" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="txt_valor_venda" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtValorVenda" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jFormattedTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtDataAquisicao" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="40" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -304,29 +307,29 @@
             <Property name="text" type="java.lang.String" value="Data de Aquisi&#xe7;&#xe3;o"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="txt_CNPF">
+        <Component class="javax.swing.JFormattedTextField" name="txtCNPJ">
           <Properties>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
               <Format format="##.###.###/####-##" subtype="-1" type="5"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txt_valor_venda">
+        <Component class="javax.swing.JTextField" name="txtValorVenda">
         </Component>
-        <Component class="javax.swing.JTextField" name="txt_volor_compra">
+        <Component class="javax.swing.JTextField" name="txtValorCompra">
         </Component>
-        <Component class="javax.swing.JTextField" name="txt_qtd">
+        <Component class="javax.swing.JTextField" name="txtQuantidade">
         </Component>
-        <Component class="javax.swing.JTextField" name="txt_eamil">
+        <Component class="javax.swing.JTextField" name="txtEmail">
         </Component>
-        <Component class="javax.swing.JTextField" name="txt_contato">
+        <Component class="javax.swing.JTextField" name="txtContato">
           <Properties>
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txt_nome_fornecedor">
+        <Component class="javax.swing.JTextField" name="txtForneceador">
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField1">
+        <Component class="javax.swing.JFormattedTextField" name="txtDataAquisicao">
           <Properties>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
               <Format format="##/##/####" subtype="-1" type="5"/>

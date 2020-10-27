@@ -5,6 +5,8 @@
  */
 package com.mycompany.infotech.views;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Icaro
@@ -31,12 +33,12 @@ public class CadastroProdutoView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txt_marca = new javax.swing.JTextField();
-        txt_nome_produto = new javax.swing.JTextField();
+        txtMarca = new javax.swing.JTextField();
+        txtNome = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        txt_especificaçoes = new javax.swing.JTextArea();
+        txtEspecificaçoes = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
-        txt_modelo = new javax.swing.JTextField();
+        txtModelo = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -46,14 +48,14 @@ public class CadastroProdutoView extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        txt_CNPF = new javax.swing.JFormattedTextField();
-        txt_valor_venda = new javax.swing.JTextField();
-        txt_volor_compra = new javax.swing.JTextField();
-        txt_qtd = new javax.swing.JTextField();
-        txt_eamil = new javax.swing.JTextField();
-        txt_contato = new javax.swing.JTextField();
-        txt_nome_fornecedor = new javax.swing.JTextField();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        txtCNPJ = new javax.swing.JFormattedTextField();
+        txtValorVenda = new javax.swing.JTextField();
+        txtValorCompra = new javax.swing.JTextField();
+        txtQuantidade = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
+        txtContato = new javax.swing.JTextField();
+        txtForneceador = new javax.swing.JTextField();
+        txtDataAquisicao = new javax.swing.JFormattedTextField();
         jPanel3 = new javax.swing.JPanel();
         btn_Alterar = new javax.swing.JButton();
         btn_Salvar = new javax.swing.JButton();
@@ -68,15 +70,15 @@ public class CadastroProdutoView extends javax.swing.JFrame {
 
         jLabel3.setText("Especificaçoes");
 
-        txt_especificaçoes.setColumns(20);
-        txt_especificaçoes.setRows(5);
-        jScrollPane1.setViewportView(txt_especificaçoes);
+        txtEspecificaçoes.setColumns(20);
+        txtEspecificaçoes.setRows(5);
+        jScrollPane1.setViewportView(txtEspecificaçoes);
 
         jLabel4.setText("Modelo");
 
-        txt_modelo.addActionListener(new java.awt.event.ActionListener() {
+        txtModelo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_modeloActionPerformed(evt);
+                txtModeloActionPerformed(evt);
             }
         });
 
@@ -99,9 +101,9 @@ public class CadastroProdutoView extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_marca)
-                            .addComponent(txt_nome_produto)
-                            .addComponent(txt_modelo))
+                            .addComponent(txtMarca)
+                            .addComponent(txtNome)
+                            .addComponent(txtModelo))
                         .addGap(14, 14, 14))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
@@ -112,15 +114,15 @@ public class CadastroProdutoView extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_nome_produto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_marca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_modelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,15 +150,15 @@ public class CadastroProdutoView extends javax.swing.JFrame {
         jLabel12.setText("Data de Aquisição");
 
         try {
-            txt_CNPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###/####-##")));
+            txtCNPJ.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###/####-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
 
-        txt_contato.setToolTipText("");
+        txtContato.setToolTipText("");
 
         try {
-            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            txtDataAquisicao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -178,14 +180,14 @@ public class CadastroProdutoView extends javax.swing.JFrame {
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_nome_fornecedor)
-                    .addComponent(txt_CNPF, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
-                    .addComponent(txt_valor_venda)
-                    .addComponent(txt_volor_compra)
-                    .addComponent(txt_qtd)
-                    .addComponent(txt_eamil)
-                    .addComponent(txt_contato)
-                    .addComponent(jFormattedTextField1))
+                    .addComponent(txtForneceador)
+                    .addComponent(txtCNPJ, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                    .addComponent(txtValorVenda)
+                    .addComponent(txtValorCompra)
+                    .addComponent(txtQuantidade)
+                    .addComponent(txtEmail)
+                    .addComponent(txtContato)
+                    .addComponent(txtDataAquisicao))
                 .addGap(14, 14, 14))
         );
         jPanel2Layout.setVerticalGroup(
@@ -196,36 +198,36 @@ public class CadastroProdutoView extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addComponent(jLabel5))
-                    .addComponent(txt_nome_fornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtForneceador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_CNPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_contato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtContato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_eamil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_qtd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_volor_compra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtValorCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_valor_venda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtValorVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(40, Short.MAX_VALUE))
+                    .addComponent(txtDataAquisicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btn_Alterar.setText("Alterar");
@@ -282,28 +284,30 @@ public class CadastroProdutoView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
+        jPanel2.getAccessibleContext().setAccessibleName("Dados do Estoque");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AlterarActionPerformed
-        // TODO add your handling code here:
+        verificaCamposPreenchidos();
     }//GEN-LAST:event_btn_AlterarActionPerformed
 
     private void btn_SalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalvarActionPerformed
-        // TODO add your handling code here:
+        verificaCamposPreenchidos();
     }//GEN-LAST:event_btn_SalvarActionPerformed
 
-    private void txt_modeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_modeloActionPerformed
+    private void txtModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModeloActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txt_modeloActionPerformed
+    }//GEN-LAST:event_txtModeloActionPerformed
 
     /**
      * @param args the command line arguments
@@ -346,7 +350,6 @@ public class CadastroProdutoView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Alterar;
     private javax.swing.JButton btn_Salvar;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -363,16 +366,43 @@ public class CadastroProdutoView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JFormattedTextField txt_CNPF;
-    private javax.swing.JTextField txt_contato;
-    private javax.swing.JTextField txt_eamil;
-    private javax.swing.JTextArea txt_especificaçoes;
-    private javax.swing.JTextField txt_marca;
-    private javax.swing.JTextField txt_modelo;
-    private javax.swing.JTextField txt_nome_fornecedor;
-    private javax.swing.JTextField txt_nome_produto;
-    private javax.swing.JTextField txt_qtd;
-    private javax.swing.JTextField txt_valor_venda;
-    private javax.swing.JTextField txt_volor_compra;
+    private javax.swing.JFormattedTextField txtCNPJ;
+    private javax.swing.JTextField txtContato;
+    private javax.swing.JFormattedTextField txtDataAquisicao;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextArea txtEspecificaçoes;
+    private javax.swing.JTextField txtForneceador;
+    private javax.swing.JTextField txtMarca;
+    private javax.swing.JTextField txtModelo;
+    private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtQuantidade;
+    private javax.swing.JTextField txtValorCompra;
+    private javax.swing.JTextField txtValorVenda;
     // End of variables declaration//GEN-END:variables
+
+    private void mensagemDadosNaoPreenchidos(String mensagem) {
+        JOptionPane.showMessageDialog(null, mensagem);
+    }
+
+    private void verificaCamposPreenchidos() {
+        String mensagem = "";
+        if(txtNome.getText().trim().equals("")
+                    || txtMarca.getText().trim().equals("") 
+                    || txtModelo.getText().trim().equals("") 
+                    || txtEspecificaçoes.getText().trim().equals("")){
+            mensagem += "preencha todos os campos do Dados do Item.\n";
+        } if(txtForneceador.getText().trim().equals("")
+                    || txtContato.getText().trim().equals("") 
+                    || txtCNPJ.getText().trim().replace(" ", "").replace("-", "").replace("+", "").replace("/", "").replace(".", "").equals("")
+                    || txtEmail.getText().trim().equals("")
+                    || txtQuantidade.getText().trim().equals("")
+                    || txtValorCompra.getText().trim().equals("")
+                    || txtValorVenda.getText().trim().equals("")
+                    || txtDataAquisicao.getText().trim().replace(" ", "").replace("-", "").replace("+", "").replace("/", "").replace(".", "").equals("")){
+            mensagem += "preencha todos os campos do Dados de Estoque.";
+        } else {
+            JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
+        }
+        mensagemDadosNaoPreenchidos(mensagem);
+    }
 }
