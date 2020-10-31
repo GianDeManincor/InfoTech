@@ -5,6 +5,13 @@
  */
 package com.mycompany.infotech.views;
 
+import com.mycompany.infotech.controller.ProdutoController;
+import com.mycompany.infotech.models.Produto;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,7 +26,26 @@ public class CadastroProdutoView extends javax.swing.JFrame {
     public CadastroProdutoView() {
         initComponents();
     }
-
+    
+    public CadastroProdutoView(boolean add) {
+        btn_Salvar.setName("Salvar");
+    }
+    
+    public CadastroProdutoView(Produto pro) {
+        btn_Salvar.setName("alterar");
+        txtNome.setText(pro.getNome_Produto());
+        txtMarca.setText(pro.getMarca());
+        txtModelo.setText(pro.getModelo());
+        txtEspecificaçoes.setText(pro.getDescricao());
+        txtForneceador.setText(pro.getFornecedor());
+        txtCNPJ.setText(pro.getCNPJ());
+        txtContato.setText(pro.getContato());
+        txtEmail.setText(pro.getEmail());
+        txtQuantidade.setText(Integer.toString(pro.getQuantidade()));
+        txtValorCompra.setText(String.valueOf(pro.getValor_compra()));
+        txtValorVenda.setText(String.valueOf(pro.getValor_venda()));
+        txtDataAquisicao.setText(pro.getData_aquisicao());
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,11 +79,10 @@ public class CadastroProdutoView extends javax.swing.JFrame {
         txtValorCompra = new javax.swing.JTextField();
         txtQuantidade = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
-        txtContato = new javax.swing.JTextField();
         txtForneceador = new javax.swing.JTextField();
         txtDataAquisicao = new javax.swing.JFormattedTextField();
+        txtContato = new javax.swing.JFormattedTextField();
         jPanel3 = new javax.swing.JPanel();
-        btn_Alterar = new javax.swing.JButton();
         btn_Salvar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -155,10 +180,14 @@ public class CadastroProdutoView extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
-        txtContato.setToolTipText("");
-
         try {
             txtDataAquisicao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            txtContato.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("## #####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -186,8 +215,8 @@ public class CadastroProdutoView extends javax.swing.JFrame {
                     .addComponent(txtValorCompra)
                     .addComponent(txtQuantidade)
                     .addComponent(txtEmail)
-                    .addComponent(txtContato)
-                    .addComponent(txtDataAquisicao))
+                    .addComponent(txtDataAquisicao)
+                    .addComponent(txtContato))
                 .addGap(14, 14, 14))
         );
         jPanel2Layout.setVerticalGroup(
@@ -205,8 +234,8 @@ public class CadastroProdutoView extends javax.swing.JFrame {
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtContato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
+                    .addComponent(jLabel7)
+                    .addComponent(txtContato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -230,13 +259,6 @@ public class CadastroProdutoView extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        btn_Alterar.setText("Alterar");
-        btn_Alterar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_AlterarActionPerformed(evt);
-            }
-        });
-
         btn_Salvar.setText("Salvar");
         btn_Salvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -251,17 +273,13 @@ public class CadastroProdutoView extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(btn_Salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btn_Alterar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_Salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_Alterar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btn_Salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -297,18 +315,123 @@ public class CadastroProdutoView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AlterarActionPerformed
-        verificaCamposPreenchidos();
-    }//GEN-LAST:event_btn_AlterarActionPerformed
-
     private void btn_SalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalvarActionPerformed
-        verificaCamposPreenchidos();
+        try {
+            String []V = valida();
+            if (V!=null) {
+                if (ProdutoController.salvar(V)) {
+                    JOptionPane.showMessageDialog(this, "Adicionado com sucesso");
+                }else{
+                    JOptionPane.showMessageDialog(this, "falha ao Adicionar");
+                }
+            }
+        } catch (ParseException ex) {
+            Logger.getLogger(CadastroProdutoView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_SalvarActionPerformed
 
     private void txtModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModeloActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtModeloActionPerformed
 
+    public String[] valida() throws ParseException{
+        String[] text = new String[12];
+        text[0] = txtNome.getText();
+        text[1] = txtMarca.getText();
+        text[2] = txtModelo.getText();
+        text[3] = txtEspecificaçoes.getText();
+        text[4] = txtValorVenda.getText().replace(",", ".");
+        text[5] = txtValorCompra.getText().replace(",", ".");
+        text[6] = txtQuantidade.getText().replace(".", "").replace(",", "");
+        text[7] = txtCNPJ.getText().replace(".", "").replace("-", "").replace("/", "");
+        text[8] = txtContato.getText().replace(" ", "").replace("+", "").replace("-", "");
+        text[9] = txtEmail.getText();
+        text[10] = txtForneceador.getText();
+        //text[11] = DataFormat(txt_data.getText());
+        
+        for (int i = 0; i < text.length-1; i++) {
+            if (!campos(i, text[i])) {
+                return text=null;
+            }
+        }
+        
+        return text;
+    }
+    
+    public boolean campos(int item, String text){
+        String[] linha ={"Nome do Produto","Marca","Modelo","Especificaçoes","Nome do Fornecedor","CNPJ","Contato","E-mail","Quantidade","Valor de Compra","Valor de Venda","Data de Aquisição"};
+        try {       
+            int n;
+            double m;
+            if (text.trim().trim().equals("")) {
+                JOptionPane.showMessageDialog(null, "Preencha o campo "+linha[item]);
+                return false;
+            }else{
+                switch(item){
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 10:    
+                        if (45 >= text.length()) {
+                            return true;
+                        }else{
+                            JOptionPane.showMessageDialog(null, linha[item]+" excedeu o tamanho do campo");
+                            return false;
+                        }
+                    case 3:
+                        if (300 >= text.length()) {
+                            return true;
+                        }else{
+                            JOptionPane.showMessageDialog(null, linha[item]+" excedeu o tamanho do campo");
+                            return false;
+                        }
+                    case 7:
+                        if (14 >= text.length()) {
+                            return true;
+                        }else{
+                            JOptionPane.showMessageDialog(null, linha[item]+" excedeu o tamanho do campo");
+                            return false;
+                        }
+                    case 8:
+                        if (13 >= text.length()) {
+                            return true;
+                        }else{
+                            JOptionPane.showMessageDialog(null, linha[item]+" excedeu o tamanho do campo");
+                            return false;
+                        }
+                    case 9:
+                        if (50 >= text.length()) {
+                            return true;
+                        }else{
+                            JOptionPane.showMessageDialog(null, linha[item]+" excedeu o tamanho do campo");
+                            return false;
+                        }
+                    case 6:
+                        n = Integer.parseInt(text);
+                        return true;
+                    case 4:
+                    case 5:
+                        m = Double.parseDouble(text);
+                        return true;
+                    case 11:
+                        DataFormat(text);
+                        return true;
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, linha[item]+" não pode ser convertido");
+            return false;
+        }
+        return true;
+    }
+    
+    public static String DataFormat(String data) throws ParseException{
+        // dd/MM/yyyy para yyyy/MM/dd
+        Date date = new SimpleDateFormat("dd/MM/yyyy").parse(data);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        return sdf.format(date);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -348,7 +471,6 @@ public class CadastroProdutoView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_Alterar;
     private javax.swing.JButton btn_Salvar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -367,7 +489,7 @@ public class CadastroProdutoView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JFormattedTextField txtCNPJ;
-    private javax.swing.JTextField txtContato;
+    private javax.swing.JFormattedTextField txtContato;
     private javax.swing.JFormattedTextField txtDataAquisicao;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextArea txtEspecificaçoes;
@@ -382,27 +504,5 @@ public class CadastroProdutoView extends javax.swing.JFrame {
 
     private void mensagemDadosNaoPreenchidos(String mensagem) {
         JOptionPane.showMessageDialog(null, mensagem);
-    }
-
-    private void verificaCamposPreenchidos() {
-        String mensagem = "";
-        if(txtNome.getText().trim().equals("")
-                    || txtMarca.getText().trim().equals("") 
-                    || txtModelo.getText().trim().equals("") 
-                    || txtEspecificaçoes.getText().trim().equals("")){
-            mensagem += "preencha todos os campos do Dados do Item.\n";
-        } if(txtForneceador.getText().trim().equals("")
-                    || txtContato.getText().trim().equals("") 
-                    || txtCNPJ.getText().trim().replace(" ", "").replace("-", "").replace("+", "").replace("/", "").replace(".", "").equals("")
-                    || txtEmail.getText().trim().equals("")
-                    || txtQuantidade.getText().trim().equals("")
-                    || txtValorCompra.getText().trim().equals("")
-                    || txtValorVenda.getText().trim().equals("")
-                    || txtDataAquisicao.getText().trim().replace(" ", "").replace("-", "").replace("+", "").replace("/", "").replace(".", "").equals("")){
-            mensagem += "preencha todos os campos do Dados de Estoque.";
-        } else {
-            JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
-        }
-        mensagemDadosNaoPreenchidos(mensagem);
     }
 }
