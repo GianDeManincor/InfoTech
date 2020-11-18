@@ -168,10 +168,10 @@ public class ProdutoDAO {
             System.out.println(instrucaoSQL);
             if (linhaAlterada>0) {
                 retorno = true;
-                System.out.println("S");
+                //System.out.println("S");
             }else{
                 retorno = false;
-                System.out.println("F");
+                //System.out.println("F");
             }
             er=0;
         } catch (SQLException | ClassNotFoundException e) {
