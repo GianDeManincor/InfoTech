@@ -5,10 +5,11 @@
  */
 package com.mycompany.infotech.views;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import com.mycompany.infotech.models.Produto;
+import com.mycompany.infotech.DAO.ProdutoDAO;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,6 +22,7 @@ public class ConsultaProdutoView extends javax.swing.JFrame {
      */
     public ConsultaProdutoView() {
         initComponents();
+        setTable();
     }
 
     /**
@@ -41,9 +43,9 @@ public class ConsultaProdutoView extends javax.swing.JFrame {
         tbl = new javax.swing.JScrollPane();
         tbl_produto = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
-        btn_Adicionar = new javax.swing.JToggleButton();
-        btn_Atualizar = new javax.swing.JToggleButton();
-        btn_excluir = new javax.swing.JToggleButton();
+        btn_Atualizar = new javax.swing.JButton();
+        btn_Excluir = new javax.swing.JButton();
+        btn_Adicionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,7 +72,7 @@ public class ConsultaProdutoView extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(txt_pesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                .addComponent(txt_pesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
@@ -112,34 +114,48 @@ public class ConsultaProdutoView extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        btn_Adicionar.setText("Adicionar");
-
         btn_Atualizar.setText("Atualizar");
+        btn_Atualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_AtualizarActionPerformed(evt);
+            }
+        });
 
-        btn_excluir.setForeground(new java.awt.Color(204, 0, 0));
-        btn_excluir.setText("excluir");
+        btn_Excluir.setText("Excluir");
+        btn_Excluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ExcluirActionPerformed(evt);
+            }
+        });
+
+        btn_Adicionar.setText("Adicionar");
+        btn_Adicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_AdicionarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btn_Adicionar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
-                .addComponent(btn_Atualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addComponent(btn_excluir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(42, 42, 42)
+                .addComponent(btn_Adicionar)
+                .addGap(40, 40, 40)
+                .addComponent(btn_Atualizar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addComponent(btn_Excluir)
+                .addGap(34, 34, 34))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_Adicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_Atualizar)
-                    .addComponent(btn_excluir))
+                    .addComponent(btn_Excluir)
+                    .addComponent(btn_Adicionar))
                 .addContainerGap())
         );
 
@@ -179,6 +195,81 @@ public class ConsultaProdutoView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "validado");
         }
     }//GEN-LAST:event_btn_buscaActionPerformed
+
+    private void btn_AdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AdicionarActionPerformed
+        add();
+    }//GEN-LAST:event_btn_AdicionarActionPerformed
+
+    private void btn_AtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AtualizarActionPerformed
+        Atualizar();
+    }//GEN-LAST:event_btn_AtualizarActionPerformed
+
+    private void btn_ExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ExcluirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_ExcluirActionPerformed
+    
+    public static void add(){
+        CadastroProdutoView tela = new CadastroProdutoView();
+        tela.setVisible(true);
+    }
+    
+    public void Atualizar(){
+        if (tbl_produto.getSelectedRow()>0) {
+            
+            Produto p = new Produto();
+            int nulinha = tbl_produto.getSelectedRow();
+            int er =0;
+            
+            try {
+
+                p.setID(Integer.parseInt(tbl_produto.getModel().getValueAt(nulinha, 0).toString()));
+                er++;
+                p.setNome_Produto(tbl_produto.getModel().getValueAt(nulinha, 1).toString());
+                er++;
+                p.setMarca(tbl_produto.getModel().getValueAt(nulinha, 2).toString());
+                er++;
+                p.setModelo(tbl_produto.getModel().getValueAt(nulinha, 3).toString());
+                er++;
+                p.setDescricao(tbl_produto.getModel().getValueAt(nulinha, 4).toString());
+                er++;
+                p.setQuantidade(Integer.parseInt(tbl_produto.getModel().getValueAt(nulinha, 5).toString()));
+                er++;
+                p.setValor_venda(Double.parseDouble(tbl_produto.getModel().getValueAt(nulinha, 6).toString()));
+                er++;
+                p.setValor_compra(Double.parseDouble(tbl_produto.getModel().getValueAt(nulinha, 7).toString()));
+                er++;
+                p.setFornecedor(tbl_produto.getModel().getValueAt(nulinha, 8).toString());
+                er++;
+                p.setCNPJ(tbl_produto.getModel().getValueAt(nulinha, 9).toString());
+                er++;
+                p.setContato(tbl_produto.getModel().getValueAt(nulinha, 10).toString());
+                er++;
+                p.setEmail(tbl_produto.getModel().getValueAt(nulinha, 11).toString());
+                er++;
+                //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                //java.sql.Date date = sdf.parse(tbl_produto.getModel().getValueAt(nulinha, 12).toString());
+                //System.out.println(date);
+                //p.setData_aquisicao(DataFormat(tbl_produto.getModel().getValueAt(nulinha, 12).toString()));
+
+                CadastroProdutoView tela = new CadastroProdutoView(p);
+                tela.setVisible(true);
+
+            } /*catch (ParseException ex) {
+                System.out.println("Erro "+er+" de conversão");
+                System.out.println(ex);
+            }*/catch (NumberFormatException ex){
+                JOptionPane.showMessageDialog(this, "Erro "+er+"\n"+ex);
+                System.out.println("Erro "+er+" de conversão");
+            } catch (Exception ex){
+                JOptionPane.showMessageDialog(this, "Erro "+er+"\n"+ex);
+                System.out.println("Erro "+er+" de conversão");
+            } 
+
+        }else{
+            JOptionPane.showMessageDialog(this, "selecione um produto");
+        }
+    }
+    
     public boolean campos(int item, String text){
         String[] linha ={"ID","Nome do Produto","Marca","Modelo","Especificaçoes","Nome do Fornecedor","CNPJ","Contato","E-mail","Quantidade","Valor de Compra","Valor de Venda","Data de Aquisição"};
         try {       
@@ -235,9 +326,9 @@ public class ConsultaProdutoView extends javax.swing.JFrame {
                     case 11:
                         m = Double.parseDouble(text.replace(",", "."));
                         return true;
-                    case 12:
-                        DataFormat(text);
-                        return true;
+//                    case 12:
+//                        DataFormat(text);
+//                        return true;
                 }
             }
         } catch (Exception e) {
@@ -247,11 +338,45 @@ public class ConsultaProdutoView extends javax.swing.JFrame {
         return true;
     }
     
-    public static String DataFormat(String data) throws ParseException{
-        // dd/MM/yyyy para yyyy/MM/dd
-        Date date = new SimpleDateFormat("dd/MM/yyyy").parse(data);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-        return sdf.format(date);
+    public void setTable(){
+        
+        ArrayList<Produto> listaProduto = ProdutoDAO.setProdutos();
+        
+        DefaultTableModel tmProdutos = new DefaultTableModel();
+        
+        tmProdutos.addColumn("ID");
+        tmProdutos.addColumn("Nome");
+        tmProdutos.addColumn("Marca");
+        tmProdutos.addColumn("Modelo");
+        tmProdutos.addColumn("Descrição");
+        tmProdutos.addColumn("Quantidade");
+        tmProdutos.addColumn("Valor de venda");
+        tmProdutos.addColumn("Valor de compra");
+        tmProdutos.addColumn("Fornecedor");
+        tmProdutos.addColumn("CNPJ");
+        tmProdutos.addColumn("Contato");
+        tmProdutos.addColumn("Email");
+        tmProdutos.addColumn("Data de Aquisição");
+        
+        tbl_produto.setModel(tmProdutos);
+        
+        tmProdutos.setRowCount(0);
+        
+        for (Produto p : listaProduto){
+            tmProdutos.addRow(new Object[]{p.getID(), p.getNome_Produto(), p.getMarca(), p.getModelo(), 
+                p.getDescricao(), p.getQuantidade(), p.getValor_venda(), p.getValor_compra(), p.getFornecedor(),
+                p.getCNPJ(), p.getContato(), p.getEmail(), p.getData_aquisicao()});
+        }
+        
+        tbl_produto.getColumnModel().getColumn(0).setPreferredWidth(20);
+        tbl_produto.getColumnModel().getColumn(1).setPreferredWidth(150);
+        tbl_produto.getColumnModel().getColumn(2).setPreferredWidth(50);
+        tbl_produto.getColumnModel().getColumn(3).setPreferredWidth(125);
+        tbl_produto.getColumnModel().getColumn(4).setPreferredWidth(50);
+        tbl_produto.getColumnModel().getColumn(5).setPreferredWidth(25);
+        tbl_produto.getColumnModel().getColumn(6).setPreferredWidth(50);
+        tbl_produto.getColumnModel().getColumn(7).setPreferredWidth(50);
+        tbl_produto.getColumnModel().getColumn(9).setPreferredWidth(100);
     }
     
     /**
@@ -291,10 +416,10 @@ public class ConsultaProdutoView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToggleButton btn_Adicionar;
-    private javax.swing.JToggleButton btn_Atualizar;
+    private javax.swing.JButton btn_Adicionar;
+    private javax.swing.JButton btn_Atualizar;
+    private javax.swing.JButton btn_Excluir;
     private javax.swing.JButton btn_busca;
-    private javax.swing.JToggleButton btn_excluir;
     private javax.swing.JComboBox<String> cmb_coluna;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
