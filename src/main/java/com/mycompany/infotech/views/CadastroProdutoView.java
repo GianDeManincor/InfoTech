@@ -27,12 +27,16 @@ public class CadastroProdutoView extends javax.swing.JFrame {
         initComponents();
     }
     
-    public CadastroProdutoView(boolean add) {
-        btn_Salvar.setName("Salvar");
-    }
+    private int ID;
+    private String modotele="ADD";
     
     public CadastroProdutoView(Produto pro) {
-        btn_Salvar.setName("alterar");
+        initComponents();
+        btn_Salvar.setText("Alterar");
+        ID=pro.getID();
+        lbl_Atualizar.setText("você está alterando o produto de código: "+ID);
+        modotele = "Alterar";
+        
         txtNome.setText(pro.getNome_Produto());
         txtMarca.setText(pro.getMarca());
         txtModelo.setText(pro.getModelo());
@@ -44,7 +48,7 @@ public class CadastroProdutoView extends javax.swing.JFrame {
         txtQuantidade.setText(Integer.toString(pro.getQuantidade()));
         txtValorCompra.setText(String.valueOf(pro.getValor_compra()));
         txtValorVenda.setText(String.valueOf(pro.getValor_venda()));
-        txtDataAquisicao.setText(pro.getData_aquisicao());
+        jdata_aquisicao.setDate(pro.getData_aquisicao());
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -80,10 +84,11 @@ public class CadastroProdutoView extends javax.swing.JFrame {
         txtQuantidade = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
         txtForneceador = new javax.swing.JTextField();
-        txtDataAquisicao = new javax.swing.JFormattedTextField();
         txtContato = new javax.swing.JFormattedTextField();
+        jdata_aquisicao = new com.toedter.calendar.JDateChooser();
         jPanel3 = new javax.swing.JPanel();
         btn_Salvar = new javax.swing.JButton();
+        lbl_Atualizar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -131,7 +136,7 @@ public class CadastroProdutoView extends javax.swing.JFrame {
                             .addComponent(txtModelo))
                         .addGap(14, 14, 14))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1)
                         .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
@@ -181,16 +186,12 @@ public class CadastroProdutoView extends javax.swing.JFrame {
         }
 
         try {
-            txtDataAquisicao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-
-        try {
             txtContato.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("## #####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+
+        jdata_aquisicao.setDateFormatString("dd/MM/yyyy");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -198,25 +199,26 @@ public class CadastroProdutoView extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtForneceador)
-                    .addComponent(txtCNPJ, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                    .addComponent(txtCNPJ)
                     .addComponent(txtValorVenda)
                     .addComponent(txtValorCompra)
                     .addComponent(txtQuantidade)
                     .addComponent(txtEmail)
-                    .addComponent(txtDataAquisicao)
-                    .addComponent(txtContato))
+                    .addComponent(txtContato)
+                    .addComponent(jdata_aquisicao, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
                 .addGap(14, 14, 14))
         );
         jPanel2Layout.setVerticalGroup(
@@ -253,9 +255,9 @@ public class CadastroProdutoView extends javax.swing.JFrame {
                     .addComponent(txtValorVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(txtDataAquisicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jdata_aquisicao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -273,13 +275,17 @@ public class CadastroProdutoView extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(btn_Salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
+                .addComponent(lbl_Atualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(btn_Salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_Salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_Atualizar))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -289,7 +295,7 @@ public class CadastroProdutoView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(14, 14, 14))
@@ -313,18 +319,30 @@ public class CadastroProdutoView extends javax.swing.JFrame {
         jPanel2.getAccessibleContext().setAccessibleName("Dados do Estoque");
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_SalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalvarActionPerformed
         try {
             String []V = valida();
-            if (V!=null) {
-                if (ProdutoController.salvar(V)) {
-                    JOptionPane.showMessageDialog(this, "Adicionado com sucesso");
+            Date data = jdata_aquisicao.getDate();
+            if (V!=null && data!=null) {
+                if ("ADD".equals(modotele)) {
+                    if (ProdutoController.salvar(V, data)) {
+                        JOptionPane.showMessageDialog(this, "Adicionado com sucesso");
+                    }else{
+                        JOptionPane.showMessageDialog(this, "falha ao Adicionar");
+                    }
                 }else{
-                    JOptionPane.showMessageDialog(this, "falha ao Adicionar");
+                    if (ProdutoController.Alterar(V, data)) {
+                        JOptionPane.showMessageDialog(this, "Atualizado com sucesso");
+                    }else{
+                        JOptionPane.showMessageDialog(this, "falha ao Atualizado");
+                    }
                 }
-            }
+            }else{
+                JOptionPane.showMessageDialog(this, "Preencha o campo Data de Aquisição");
+            }  
         } catch (ParseException ex) {
             Logger.getLogger(CadastroProdutoView.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -347,9 +365,12 @@ public class CadastroProdutoView extends javax.swing.JFrame {
         text[8] = txtContato.getText().replace(" ", "").replace("+", "").replace("-", "");
         text[9] = txtEmail.getText();
         text[10] = txtForneceador.getText();
-        //text[11] = DataFormat(txt_data.getText());
         
-        for (int i = 0; i < text.length-1; i++) {
+        if (!"ADD".equals(modotele)) {
+            text[11] = Integer.toString(ID);
+        }
+        
+        for (int i = 0; i < text.length-2; i++) {
             if (!campos(i, text[i])) {
                 return text=null;
             }
@@ -425,6 +446,13 @@ public class CadastroProdutoView extends javax.swing.JFrame {
         return true;
     }
     
+    /**
+     *
+     * @param data
+     * @return
+     * @throws ParseException 
+     * @deprecated
+     */
     public static String DataFormat(String data) throws ParseException{
         // dd/MM/yyyy para yyyy/MM/dd
         Date date = new SimpleDateFormat("dd/MM/yyyy").parse(data);
@@ -488,9 +516,10 @@ public class CadastroProdutoView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private com.toedter.calendar.JDateChooser jdata_aquisicao;
+    private javax.swing.JLabel lbl_Atualizar;
     private javax.swing.JFormattedTextField txtCNPJ;
     private javax.swing.JFormattedTextField txtContato;
-    private javax.swing.JFormattedTextField txtDataAquisicao;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextArea txtEspecificaçoes;
     private javax.swing.JTextField txtForneceador;

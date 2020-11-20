@@ -8,17 +8,29 @@ package com.mycompany.infotech.controller;
 import com.mycompany.infotech.DAO.ProdutoDAO;
 import com.mycompany.infotech.models.Produto;
 import java.text.ParseException;
+import java.util.Date;
 
 /**
  *
  * @author Icaro
  */
 public class ProdutoController {
-    public static boolean salvar(String[] v) throws ParseException{
+    
+    public static boolean salvar(String[] newP, Date data) throws ParseException{
         
         Produto pro = new Produto();
-        pro.setProduto(v);
+        
+        pro.setProduto(newP,data);
         
         return ProdutoDAO.salvar(pro);
+    }
+    
+    public static boolean  Alterar(String[] newP, Date data) throws ParseException{
+        
+        Produto pro = new Produto();
+        
+        pro.setProduto(newP,data);
+        
+        return ProdutoDAO.Atualizar(pro);
     }
 }

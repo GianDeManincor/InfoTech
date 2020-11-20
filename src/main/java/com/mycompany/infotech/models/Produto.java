@@ -5,9 +5,12 @@
  */
 package com.mycompany.infotech.models;
 
+import java.text.ParseException;
+import java.util.Date;
 /**
  *
  * @author Gian
+ * @author Icaro
  */
 //teste
 
@@ -25,9 +28,9 @@ public class Produto {
     private String Contato;
     private String Email;
     private String Fornecedor;
-    private String Data_aquisicao;
+    private Date Data_aquisicao;
     
-    public void setProduto(String [] v){
+    public void setProduto(String [] v, Date data) throws ParseException{
         this.Nome_Produto = v[0];
         this.marca = v[1];
         this.modelo = v[2];
@@ -39,9 +42,28 @@ public class Produto {
         this.Contato = v[8];
         this.Email = v[9];
         this.Fornecedor = v[10];
-        this.Data_aquisicao = v[11];
+        this.Data_aquisicao = data;
+        if (v[11]!=null) {
+            this.ID = Integer.parseInt(v[11]); 
+        }
     }
     
+    public void setAllProduto(int ID, String Nome_Produto, String marca, String modelo, String descricao, double Valor_venda, double Valor_compra, int Quantidade, String CNPJ, String Contato, String Email, String Fornecedor, Date Data_aquisicao){
+        this.ID = ID;
+        this.Nome_Produto = Nome_Produto;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.descricao = descricao;
+        this.Valor_venda = Valor_venda;
+        this.Valor_compra = Valor_compra;
+        this.Quantidade = Quantidade;
+        this.CNPJ = CNPJ;
+        this.Contato = Contato;
+        this.Email = Email;
+        this.Fornecedor = Fornecedor;
+        this.Data_aquisicao = Data_aquisicao;
+    }
+
     public int getID() {
         return ID;
     }
@@ -137,12 +159,12 @@ public class Produto {
     public void setFornecedor(String Fornecedor) {
         this.Fornecedor = Fornecedor;
     }
-
-    public String getData_aquisicao() {
+    
+    public Date getData_aquisicao() {
         return Data_aquisicao;
     }
 
-    public void setData_aquisicao(String Data_aquisicao) {
+    public void setData_aquisicao(Date Data_aquisicao) {
         this.Data_aquisicao = Data_aquisicao;
     }
     
