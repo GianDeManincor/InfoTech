@@ -91,6 +91,7 @@ public class CadastroProdutoView extends javax.swing.JFrame {
         btn_voltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cadastro de Produto");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados do Item", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 

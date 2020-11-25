@@ -50,6 +50,7 @@ public class ConsultaProdutoView extends javax.swing.JFrame {
         btn_atualizartabela = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Consulta de produto");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -303,7 +304,7 @@ public class ConsultaProdutoView extends javax.swing.JFrame {
     }
     
     public void Atualizar(){
-        if (tbl_produto.getSelectedRow()>0) {
+        if (tbl_produto.getSelectedRow()>=0) {
             
             Produto p = new Produto();
             int nulinha = tbl_produto.getSelectedRow();

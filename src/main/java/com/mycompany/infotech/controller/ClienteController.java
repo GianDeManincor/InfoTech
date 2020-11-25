@@ -9,6 +9,7 @@ import com.mycompany.infotech.models.Cliente;
 import com.mycompany.infotech.DAO.ClienteDAO;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -53,10 +54,44 @@ public class ClienteController {
         return listaRetono;
     }
     
-    public static  boolean exclusao(int ID){
+    public static boolean exclusao(int ID){
         Cliente c = new Cliente();
         c.setID(ID);
         
         return ClienteDAO.exclusao(c);
     }
+    
+    public static boolean salvar(Date DataNascimento, String Sexo, String[] text){
+        
+        Cliente cli = new Cliente();
+        
+        cli.setNome(text[0]);
+        cli.setDatanaci(DataNascimento);
+        cli.setSexo(Sexo);
+        cli.setEmail(text[1]);
+        cli.setCPF(text[2]);
+        cli.setCidade(text[3]);
+        cli.setEstado(text[4]);
+        cli.setEndereco(text[5]);
+        
+        return ClienteDAO.salvar(cli);
+    }
+    
+    public static boolean Alterar(Date DataNascimento, String Sexo, int ID, String[] text) {
+        
+        Cliente cli = new Cliente();
+        
+        cli.setID(ID);
+        cli.setNome(text[0]);
+        cli.setDatanaci(DataNascimento);
+        cli.setSexo(Sexo);
+        cli.setEmail(text[1]);
+        cli.setCPF(text[2]);
+        cli.setCidade(text[3]);
+        cli.setEstado(text[4]);
+        cli.setEndereco(text[5]);
+        
+        return ClienteDAO.Atualizar(cli);
+    }
+    
 }

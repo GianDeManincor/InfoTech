@@ -53,6 +53,7 @@ public class ConsultaClienteView extends javax.swing.JFrame {
         btn_Excluir1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Consulta de Cliente");
 
         tbl_cliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -211,7 +212,7 @@ public class ConsultaClienteView extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_atualizartabelaActionPerformed
 
     private void btn_AtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AtualizarActionPerformed
-        // TODO add your handling code here:
+        Atualizar();
     }//GEN-LAST:event_btn_AtualizarActionPerformed
 
     private void btn_Excluir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Excluir1ActionPerformed
@@ -243,7 +244,8 @@ public class ConsultaClienteView extends javax.swing.JFrame {
     }
     
     public void Atualizar(){
-        if (tbl_cliente.getSelectedRow()>0) {
+        System.out.println(tbl_cliente.getSelectedRow());
+        if (tbl_cliente.getSelectedRow()>=0) {
             
             Cliente c = new Cliente();
             int nulinha = tbl_cliente.getSelectedRow();
@@ -271,8 +273,8 @@ public class ConsultaClienteView extends javax.swing.JFrame {
                 er++;
                 
                 
-                /*CadastroClienteView tela = new CadastroClienteView(c);
-                tela.setVisible(true);*/
+                CadastroClienteView tela = new CadastroClienteView(c);
+                tela.setVisible(true);
                 
                 ConsultaClienteView.this.dispose();
                 
@@ -283,6 +285,8 @@ public class ConsultaClienteView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Erro "+er+"\n"+ex);
                 System.out.println("Erro "+er+" de conversão");
             } 
+        }else{
+            JOptionPane.showMessageDialog(this, "selecione um cliente");
         }
     }
     
@@ -328,7 +332,7 @@ public class ConsultaClienteView extends javax.swing.JFrame {
             tbl_cliente.getColumnModel().getColumn(1).setPreferredWidth(150);
             tbl_cliente.getColumnModel().getColumn(2).setPreferredWidth(50);
             tbl_cliente.getColumnModel().getColumn(3).setPreferredWidth(20);
-            tbl_cliente.getColumnModel().getColumn(4).setPreferredWidth(50);
+            tbl_cliente.getColumnModel().getColumn(4).setPreferredWidth(150);
             tbl_cliente.getColumnModel().getColumn(5).setPreferredWidth(25);
             tbl_cliente.getColumnModel().getColumn(6).setPreferredWidth(50);
             tbl_cliente.getColumnModel().getColumn(7).setPreferredWidth(50);
@@ -431,8 +435,8 @@ public class ConsultaClienteView extends javax.swing.JFrame {
         tbl_cliente.getColumnModel().getColumn(1).setPreferredWidth(150);
         tbl_cliente.getColumnModel().getColumn(2).setPreferredWidth(50);
         tbl_cliente.getColumnModel().getColumn(3).setPreferredWidth(20);
-        tbl_cliente.getColumnModel().getColumn(4).setPreferredWidth(50);
-        tbl_cliente.getColumnModel().getColumn(5).setPreferredWidth(25);
+        tbl_cliente.getColumnModel().getColumn(4).setPreferredWidth(100);
+        tbl_cliente.getColumnModel().getColumn(5).setPreferredWidth(50);
         tbl_cliente.getColumnModel().getColumn(6).setPreferredWidth(50);
         tbl_cliente.getColumnModel().getColumn(7).setPreferredWidth(50);
     }
