@@ -333,7 +333,7 @@ public class ConsultaClienteView extends javax.swing.JFrame {
             tbl_cliente.getColumnModel().getColumn(2).setPreferredWidth(50);
             tbl_cliente.getColumnModel().getColumn(3).setPreferredWidth(20);
             tbl_cliente.getColumnModel().getColumn(4).setPreferredWidth(150);
-            tbl_cliente.getColumnModel().getColumn(5).setPreferredWidth(25);
+            tbl_cliente.getColumnModel().getColumn(5).setPreferredWidth(50);
             tbl_cliente.getColumnModel().getColumn(6).setPreferredWidth(50);
             tbl_cliente.getColumnModel().getColumn(7).setPreferredWidth(50);
         
