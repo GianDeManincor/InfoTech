@@ -32,7 +32,7 @@ public class ProdutoDAO {
             //Error 1
             conexao = GerenciadorConexao.abrirConexao();
             
-            instrucaoSQL = conexao.prepareStatement("INSERT INTO estoque (Nome_Produto,marca,modelo,descricao,Valor_venda,Valor_compra,Quantidade,CNPJ,Contato,Email,Fornecedor,Data_aquisicao) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
+            instrucaoSQL = conexao.prepareStatement("INSERT INTO estoque (Nome_Produto,marca,modelo,descricao,Valor_venda,Valor_compra,QTD_estoque,CNPJ,Contato,Email,Fornecedor,Data_aquisicao) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
             
             instrucaoSQL.setString(1,pro.getNome_Produto());
             instrucaoSQL.setString(2,pro.getMarca());
@@ -95,6 +95,123 @@ public class ProdutoDAO {
             
             rs = instrucaoSQL.executeQuery();
             
+            while (rs.next()) {
+                Produto p = new Produto();
+                p.setID(rs.getInt("cod_E"));
+                p.setNome_Produto(rs.getString("Nome_Produto"));
+                p.setMarca(rs.getString("marca"));
+                p.setModelo(rs.getString("modelo"));
+                p.setDescricao(rs.getString("descricao"));
+                p.setValor_venda(rs.getDouble("Valor_venda"));
+                p.setValor_compra(rs.getDouble("Valor_compra"));
+                p.setQuantidade(rs.getInt("QTD_estoque"));
+                p.setCNPJ(rs.getString("CNPJ"));
+                p.setContato(rs.getString("contato"));
+                p.setEmail(rs.getString("Email"));
+                p.setFornecedor(rs.getString("Fornecedor"));
+                p.setData_aquisicao(rs.getDate("Data_aquisicao"));
+                
+                listaProdutos.add(p);
+            }
+            
+        }catch (SQLException | ClassNotFoundException ex) {
+            System.out.println(ex.getMessage());
+            listaProdutos = null;
+        }finally{
+            try {
+                if (rs!=null) {
+                    rs.close();
+                }
+                if (instrucaoSQL!=null) {
+                    instrucaoSQL.close();
+                }
+                conexao.close();
+                GerenciadorConexao.fecharConexao();
+                System.out.println("conexão finalizada");
+            } catch (SQLException ex) {
+            }
+        }
+        return listaProdutos;
+    }
+    
+    public static ArrayList<Produto> Busca(String coluna, String Busca){
+        ResultSet rs = null;
+        Connection conexao = null;
+        PreparedStatement instrucaoSQL = null;
+
+        ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
+    
+        try {
+            conexao = GerenciadorConexao.abrirConexao();
+            
+            switch(coluna){
+                case "ID":
+                    instrucaoSQL = conexao.prepareStatement("SELECT * FROM estoque WHERE Cod_e LIKE ? ");
+                    instrucaoSQL.setInt(1, Integer.parseInt(Busca));
+                    rs = instrucaoSQL.executeQuery();
+                break;
+                case "Nome do Produto":
+                    instrucaoSQL = conexao.prepareStatement("SELECT * FROM estoque WHERE Nome_Produto LIKE ? ");
+                    instrucaoSQL.setString(1, "%"+Busca+"%");
+                    rs = instrucaoSQL.executeQuery();
+                break;
+                case "Marca":
+                    instrucaoSQL = conexao.prepareStatement("SELECT * FROM estoque WHERE marca LIKE ? ");
+                    instrucaoSQL.setString(1, "%"+Busca+"%");
+                    rs = instrucaoSQL.executeQuery();
+                break;
+                case "Modelo":
+                    instrucaoSQL = conexao.prepareStatement("SELECT * FROM estoque WHERE modelo LIKE ? ");
+                    instrucaoSQL.setString(1, "%"+Busca+"%");
+                    rs = instrucaoSQL.executeQuery();
+                break;
+                case "Especificaçoes":
+                    instrucaoSQL = conexao.prepareStatement("SELECT * FROM estoque WHERE descricao LIKE ? ");
+                    instrucaoSQL.setString(1, "%"+Busca+"%");
+                    rs = instrucaoSQL.executeQuery();
+                break;
+                case "Nome do Fornecedor":
+                    instrucaoSQL = conexao.prepareStatement("SELECT * FROM estoque WHERE Fornecedor LIKE ? ");
+                    instrucaoSQL.setString(1, "%"+Busca+"%");
+                    rs = instrucaoSQL.executeQuery();
+                break;
+                case "CNPJ":
+                    instrucaoSQL = conexao.prepareStatement("SELECT * FROM estoque WHERE CNPJ LIKE ? ");
+                    instrucaoSQL.setString(1, Busca);
+                    rs = instrucaoSQL.executeQuery();
+                break;
+                case "Contato":
+                    instrucaoSQL = conexao.prepareStatement("SELECT * FROM estoque WHERE Contato LIKE ? ");
+                    instrucaoSQL.setString(1, Busca);
+                    rs = instrucaoSQL.executeQuery();
+                break;
+                case "E-mail":
+                    instrucaoSQL = conexao.prepareStatement("SELECT * FROM estoque WHERE Email LIKE ? ");
+                    instrucaoSQL.setString(1, "%"+Busca+"%");
+                    rs = instrucaoSQL.executeQuery();
+                break;
+                case "Quantidade":
+                    instrucaoSQL = conexao.prepareStatement("SELECT * FROM estoque WHERE QTD_estoque LIKE ? ");
+                    instrucaoSQL.setInt(1, Integer.parseInt(Busca));
+                    rs = instrucaoSQL.executeQuery();
+                break;
+                case "Valor de Compra":
+                    instrucaoSQL = conexao.prepareStatement("SELECT * FROM estoque WHERE Valor_compra LIKE ? ");
+                    instrucaoSQL.setDouble(1, Double.parseDouble(Busca.replace(",", ".")));
+                    rs = instrucaoSQL.executeQuery();
+                break;
+                case "Valor de Venda":
+                    instrucaoSQL = conexao.prepareStatement("SELECT * FROM estoque WHERE Valor_venda LIKE ? ");
+                    instrucaoSQL.setDouble(1, Double.parseDouble(Busca.replace(",", ".")));
+                    rs = instrucaoSQL.executeQuery();
+                break;
+//                case "Data de Aquisição":
+//                    instrucaoSQL = conexao.prepareStatement("SELECT * FROM estoque WHERE Data_aquisicao LIKE ? ");
+//                    instrucaoSQL.setInt(1, Integer.parseInt(Busca));
+//                    rs = instrucaoSQL.executeQuery();
+//                break;
+            }
+            
             while (rs.next()) {                
                 Produto p = new Produto();
                 p.setID(rs.getInt("cod_E"));
@@ -104,7 +221,7 @@ public class ProdutoDAO {
                 p.setDescricao(rs.getString("descricao"));
                 p.setValor_venda(rs.getDouble("Valor_venda"));
                 p.setValor_compra(rs.getDouble("Valor_compra"));
-                p.setQuantidade(rs.getInt("Quantidade"));
+                p.setQuantidade(rs.getInt("QTD_estoque"));
                 p.setCNPJ(rs.getString("CNPJ"));
                 p.setContato(rs.getString("contato"));
                 p.setEmail(rs.getString("Email"));
@@ -146,7 +263,7 @@ public class ProdutoDAO {
             conexao = GerenciadorConexao.abrirConexao();
             er++;
             //Error 2
-            instrucaoSQL = conexao.prepareStatement("UPDATE estoque SET Nome_Produto = ?, marca = ?, modelo = ?, descricao = ?, Valor_venda = ?, Valor_compra = ?, Quantidade = ?, CNPJ = ?, Contato = ?, Email = ?, Fornecedor = ?, Data_aquisicao = ? WHERE cod_E =? ");
+            instrucaoSQL = conexao.prepareStatement("UPDATE estoque SET Nome_Produto = ?, marca = ?, modelo = ?, descricao = ?, Valor_venda = ?, Valor_compra = ?, QTD_estoque = ?, CNPJ = ?, Contato = ?, Email = ?, Fornecedor = ?, Data_aquisicao = ? WHERE cod_E =? ");
             er++;
             //Error 3
             instrucaoSQL.setString(1, p.getNome_Produto());
@@ -165,14 +282,10 @@ public class ProdutoDAO {
             er++;
             //Error 4
             int linhaAlterada = instrucaoSQL.executeUpdate();
-            System.out.println(instrucaoSQL);
-            if (linhaAlterada>0) {
-                retorno = true;
-                //System.out.println("S");
-            }else{
-                retorno = false;
-                //System.out.println("F");
-            }
+            
+            //retorno false | trur
+            retorno = linhaAlterada>0;
+            
             er=0;
         } catch (SQLException | ClassNotFoundException e) {
             System.out.print(e.getMessage());
@@ -192,6 +305,55 @@ public class ProdutoDAO {
                 
             }
             System.out.println("erro"+er);
+        }
+        return retorno;
+    }
+    
+    public static boolean exclusao(Produto p){
+        
+        boolean retorno = false;
+        Connection conexao = null;
+        PreparedStatement instrucaoSQL = null;
+        
+        int en=1;
+        
+        try {
+            //Error 1
+            conexao = GerenciadorConexao.abrirConexao();
+            
+            instrucaoSQL = conexao.prepareStatement("DELETE FROM estoque WHERE cod_E = ?");
+            
+            instrucaoSQL.setInt(1, p.getID());
+            
+            en++;
+            //Error 2
+            int linhaAfetadas = instrucaoSQL.executeUpdate();
+            en++;
+            //Error 3
+            if(linhaAfetadas>0){
+                System.out.println("exclusao de Produto");
+                retorno = true;
+            }
+            
+        } catch (ClassNotFoundException ex) {
+            
+            System.err.println("Erro ao carregar o driver! \nError "+en+" \n"+ex);
+            retorno = false;
+            
+        } catch (SQLException ex) {
+            
+            System.err.println("Erro ao abrir a conexão! \nError "+en+" \n"+ex);
+            retorno = false;
+            
+        }finally{
+            try {
+                if(conexao!= null)
+                    conexao.close();
+
+                GerenciadorConexao.fecharConexao();
+                System.out.println("conexão finalizada");
+            } catch (SQLException ex) {
+            }
         }
         return retorno;
     }

@@ -7,6 +7,7 @@ package com.mycompany.infotech.views;
 
 import com.mycompany.infotech.models.Produto;
 import com.mycompany.infotech.DAO.ProdutoDAO;
+import com.mycompany.infotech.controller.ProdutoController;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -46,6 +47,7 @@ public class ConsultaProdutoView extends javax.swing.JFrame {
         btn_Atualizar = new javax.swing.JButton();
         btn_Excluir = new javax.swing.JButton();
         btn_Adicionar = new javax.swing.JButton();
+        btn_atualizartabela = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,7 +74,7 @@ public class ConsultaProdutoView extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(txt_pesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                .addComponent(txt_pesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
@@ -121,6 +123,7 @@ public class ConsultaProdutoView extends javax.swing.JFrame {
             }
         });
 
+        btn_Excluir.setForeground(new java.awt.Color(204, 0, 0));
         btn_Excluir.setText("Excluir");
         btn_Excluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,18 +138,27 @@ public class ConsultaProdutoView extends javax.swing.JFrame {
             }
         });
 
+        btn_atualizartabela.setText("Atualizar tabela");
+        btn_atualizartabela.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_atualizartabelaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
+                .addGap(18, 18, 18)
                 .addComponent(btn_Adicionar)
-                .addGap(40, 40, 40)
+                .addGap(18, 18, 18)
                 .addComponent(btn_Atualizar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(btn_atualizartabela)
+                .addGap(18, 18, 18)
                 .addComponent(btn_Excluir)
-                .addGap(34, 34, 34))
+                .addGap(18, 18, 18))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,7 +167,8 @@ public class ConsultaProdutoView extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_Atualizar)
                     .addComponent(btn_Excluir)
-                    .addComponent(btn_Adicionar))
+                    .addComponent(btn_Adicionar)
+                    .addComponent(btn_atualizartabela))
                 .addContainerGap())
         );
 
@@ -190,10 +203,7 @@ public class ConsultaProdutoView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_buscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscaActionPerformed
-        JOptionPane.showMessageDialog(null, "cmb"+cmb_coluna.getSelectedIndex()+" txt"+txt_pesquisa.getText());
-        if (campos(cmb_coluna.getSelectedIndex(), txt_pesquisa.getText())){
-            JOptionPane.showMessageDialog(null, "validado");
-        }
+        Busca();
     }//GEN-LAST:event_btn_buscaActionPerformed
 
     private void btn_AdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_AdicionarActionPerformed
@@ -205,12 +215,91 @@ public class ConsultaProdutoView extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_AtualizarActionPerformed
 
     private void btn_ExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ExcluirActionPerformed
-        // TODO add your handling code here:
+        Excluir();
     }//GEN-LAST:event_btn_ExcluirActionPerformed
+
+    private void btn_atualizartabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_atualizartabelaActionPerformed
+        setTable();
+    }//GEN-LAST:event_btn_atualizartabelaActionPerformed
     
-    public static void add(){
+    public void Busca(){
+        //JOptionPane.showMessageDialog(null, "cmb "+cmb_coluna.getSelectedItem()+" txt "+txt_pesquisa.getText());
+        if (campos(cmb_coluna.getSelectedIndex(), txt_pesquisa.getText())){
+            
+            ArrayList<String[]> listaProduto = ProdutoController.Busca((String) cmb_coluna.getSelectedItem(), txt_pesquisa.getText());
+        
+            DefaultTableModel tmProdutos = new DefaultTableModel();
+
+            tmProdutos.addColumn("ID");
+            tmProdutos.addColumn("Nome");
+            tmProdutos.addColumn("Marca");
+            tmProdutos.addColumn("Modelo");
+            tmProdutos.addColumn("Descrição");
+            tmProdutos.addColumn("Quantidade");
+            tmProdutos.addColumn("Valor de venda");
+            tmProdutos.addColumn("Valor de compra");
+            tmProdutos.addColumn("Fornecedor");
+            tmProdutos.addColumn("CNPJ");
+            tmProdutos.addColumn("Contato");
+            tmProdutos.addColumn("Email");
+            tmProdutos.addColumn("Data de Aquisição");
+
+            tbl_produto.setModel(tmProdutos);
+
+            tmProdutos.setRowCount(0);
+            
+            if (listaProduto.size()>0) {
+                System.out.println("itens retornados "+listaProduto.size());
+                for (String[] p : listaProduto){
+                    tmProdutos.addRow(p);
+                }
+            }else{
+                System.out.println("não foi encontrado nenhum registro");
+                JOptionPane.showMessageDialog(this, "não foi encontrado nenhum registro");
+            }
+
+            tbl_produto.getColumnModel().getColumn(0).setPreferredWidth(20);
+            tbl_produto.getColumnModel().getColumn(1).setPreferredWidth(150);
+            tbl_produto.getColumnModel().getColumn(2).setPreferredWidth(50);
+            tbl_produto.getColumnModel().getColumn(3).setPreferredWidth(125);
+            tbl_produto.getColumnModel().getColumn(4).setPreferredWidth(50);
+            tbl_produto.getColumnModel().getColumn(5).setPreferredWidth(25);
+            tbl_produto.getColumnModel().getColumn(6).setPreferredWidth(50);
+            tbl_produto.getColumnModel().getColumn(7).setPreferredWidth(50);
+            tbl_produto.getColumnModel().getColumn(9).setPreferredWidth(110);
+            
+        }
+    }
+    
+    public void Excluir(){
+        if (tbl_produto.getSelectedRow()>0) {
+            int nulinha = tbl_produto.getSelectedRow();
+            
+            int proceed = JOptionPane.showConfirmDialog(this,"Tem certeza que deseja excluir produto?\n"+tbl_produto.getModel().getValueAt(nulinha, 1).toString(),"Excluir",JOptionPane.YES_NO_OPTION);
+            
+            if (proceed == JOptionPane.YES_OPTION) {
+                
+                if (ProdutoController.exclusao(Integer.parseInt(tbl_produto.getModel().getValueAt(nulinha, 0).toString()))) {
+                    JOptionPane.showMessageDialog(this, "Produto excluído");
+                }else{
+                    JOptionPane.showMessageDialog(this, "Erro ao excluir produto");
+                }
+                
+                setTable();
+                
+            }else{
+                JOptionPane.showMessageDialog(this, "Cancelada a exclusão");
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "Selecione um produto");
+        }
+    }
+    
+    public void add(){
         CadastroProdutoView tela = new CadastroProdutoView();
         tela.setVisible(true);
+        
+        ConsultaProdutoView.this.dispose();
     }
     
     public void Atualizar(){
@@ -253,6 +342,8 @@ public class ConsultaProdutoView extends javax.swing.JFrame {
 
                 CadastroProdutoView tela = new CadastroProdutoView(p);
                 tela.setVisible(true);
+                
+                ConsultaProdutoView.this.dispose();
 
             } /*catch (ParseException ex) {
                 System.out.println("Erro "+er+" de conversão");
@@ -340,7 +431,7 @@ public class ConsultaProdutoView extends javax.swing.JFrame {
     
     public void setTable(){
         
-        ArrayList<Produto> listaProduto = ProdutoDAO.setProdutos();
+        ArrayList<String[]> listaProduto = ProdutoController.selecionar();
         
         DefaultTableModel tmProdutos = new DefaultTableModel();
         
@@ -362,10 +453,8 @@ public class ConsultaProdutoView extends javax.swing.JFrame {
         
         tmProdutos.setRowCount(0);
         
-        for (Produto p : listaProduto){
-            tmProdutos.addRow(new Object[]{p.getID(), p.getNome_Produto(), p.getMarca(), p.getModelo(), 
-                p.getDescricao(), p.getQuantidade(), p.getValor_venda(), p.getValor_compra(), p.getFornecedor(),
-                p.getCNPJ(), p.getContato(), p.getEmail(), p.getData_aquisicao()});
+        for (String[] p : listaProduto){
+            tmProdutos.addRow(p);
         }
         
         tbl_produto.getColumnModel().getColumn(0).setPreferredWidth(20);
@@ -376,7 +465,7 @@ public class ConsultaProdutoView extends javax.swing.JFrame {
         tbl_produto.getColumnModel().getColumn(5).setPreferredWidth(25);
         tbl_produto.getColumnModel().getColumn(6).setPreferredWidth(50);
         tbl_produto.getColumnModel().getColumn(7).setPreferredWidth(50);
-        tbl_produto.getColumnModel().getColumn(9).setPreferredWidth(100);
+        tbl_produto.getColumnModel().getColumn(9).setPreferredWidth(110);
     }
     
     /**
@@ -419,6 +508,7 @@ public class ConsultaProdutoView extends javax.swing.JFrame {
     private javax.swing.JButton btn_Adicionar;
     private javax.swing.JButton btn_Atualizar;
     private javax.swing.JButton btn_Excluir;
+    private javax.swing.JButton btn_atualizartabela;
     private javax.swing.JButton btn_busca;
     private javax.swing.JComboBox<String> cmb_coluna;
     private javax.swing.JLabel jLabel1;
