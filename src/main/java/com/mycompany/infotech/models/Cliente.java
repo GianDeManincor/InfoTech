@@ -8,7 +8,7 @@ package com.mycompany.infotech.models;
 import java.util.Date;
 
 /**
- *
+ * @author Icaro
  * @author Gian
  */
 public class Cliente {
