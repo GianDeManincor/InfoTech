@@ -11,7 +11,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * @author Icaro
  * @author ateos
  */
 public class CadastroClienteView extends javax.swing.JFrame {
