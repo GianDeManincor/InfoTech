@@ -5,59 +5,94 @@
  */
 package com.mycompany.infotech.models;
 
+import java.util.Date;
+
 /**
- *
+ * @author Icaro
  * @author Gian
  */
 public class Cliente {
     
-    private String nome;
-    private String cpf;
-    private String endereco;
-    private String sexo;
-    private String email;
-    
-    public Cliente(){
+    private int ID;
+    private String Nome;
+    private Date Datanaci;
+    private String Sexo;
+    private String Email;
+    private String CPF;
+    private String Cidade;
+    private String Estado;
+    private String Endereco;
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public String getNome() {
-        return nome;
+        return Nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNome(String Nome) {
+        this.Nome = Nome;
     }
 
-    public String getCpf() {
-        return cpf;
+    public Date getDatanaci() {
+        return Datanaci;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
+    public void setDatanaci(Date Datanaci) {
+        this.Datanaci = Datanaci;
     }
 
     public String getSexo() {
-        return sexo;
+        return Sexo;
     }
 
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
+    public void setSexo(String Sexo) {
+        this.Sexo = Sexo;
     }
 
     public String getEmail() {
-        return email;
+        return Email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }   
+    public void setEmail(String Email) {
+        this.Email = Email;
+    }
+
+    public String getCPF() {
+        return CPF;
+    }
+
+    public void setCPF(String CPF) {
+        this.CPF = CPF;
+    }
+
+    public String getCidade() {
+        return Cidade;
+    }
+
+    public void setCidade(String Cidade) {
+        this.Cidade = Cidade;
+    }
+
+    public String getEstado() {
+        return Estado;
+    }
+
+    public void setEstado(String Estado) {
+        this.Estado = Estado;
+    }
+
+    public String getEndereco() {
+        return Endereco;
+    }
+
+    public void setEndereco(String Endereco) {
+        this.Endereco = Endereco;
+    }
 
 }
