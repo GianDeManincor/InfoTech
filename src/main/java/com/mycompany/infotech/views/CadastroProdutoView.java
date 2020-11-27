@@ -40,7 +40,7 @@ public class CadastroProdutoView extends javax.swing.JFrame {
         txtNome.setText(pro.getNome_Produto());
         txtMarca.setText(pro.getMarca());
         txtModelo.setText(pro.getModelo());
-        txtEspecificaçoes.setText(pro.getDescricao());
+        jdata_aquisicao.setText(pro.getDescricao());
         txtForneceador.setText(pro.getFornecedor());
         txtCNPJ.setText(pro.getCNPJ());
         txtContato.setText(pro.getContato());
@@ -48,7 +48,6 @@ public class CadastroProdutoView extends javax.swing.JFrame {
         txtQuantidade.setText(Integer.toString(pro.getQuantidade()));
         txtValorCompra.setText(String.valueOf(pro.getValor_compra()));
         txtValorVenda.setText(String.valueOf(pro.getValor_venda()));
-        jdata_aquisicao.setDate(pro.getData_aquisicao());
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -66,7 +65,7 @@ public class CadastroProdutoView extends javax.swing.JFrame {
         txtMarca = new javax.swing.JTextField();
         txtNome = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        txtEspecificaçoes = new javax.swing.JTextArea();
+        jdata_aquisicao = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
         txtModelo = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
@@ -85,12 +84,14 @@ public class CadastroProdutoView extends javax.swing.JFrame {
         txtEmail = new javax.swing.JTextField();
         txtForneceador = new javax.swing.JTextField();
         txtContato = new javax.swing.JFormattedTextField();
-        jdata_aquisicao = new com.toedter.calendar.JDateChooser();
+        jdate_DataAquisicao = new com.toedter.calendar.JDateChooser();
         jPanel3 = new javax.swing.JPanel();
         btn_Salvar = new javax.swing.JButton();
         lbl_Atualizar = new javax.swing.JLabel();
+        btn_voltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cadastro de Produto");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados do Item", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
@@ -100,9 +101,9 @@ public class CadastroProdutoView extends javax.swing.JFrame {
 
         jLabel3.setText("Especificaçoes");
 
-        txtEspecificaçoes.setColumns(20);
-        txtEspecificaçoes.setRows(5);
-        jScrollPane1.setViewportView(txtEspecificaçoes);
+        jdata_aquisicao.setColumns(20);
+        jdata_aquisicao.setRows(5);
+        jScrollPane1.setViewportView(jdata_aquisicao);
 
         jLabel4.setText("Modelo");
 
@@ -191,7 +192,7 @@ public class CadastroProdutoView extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
-        jdata_aquisicao.setDateFormatString("dd/MM/yyyy");
+        jdate_DataAquisicao.setDateFormatString("dd/MM/yyyy");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -212,13 +213,13 @@ public class CadastroProdutoView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtForneceador)
-                    .addComponent(txtCNPJ)
+                    .addComponent(txtCNPJ, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                     .addComponent(txtValorVenda)
                     .addComponent(txtValorCompra)
                     .addComponent(txtQuantidade)
                     .addComponent(txtEmail)
                     .addComponent(txtContato)
-                    .addComponent(jdata_aquisicao, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
+                    .addComponent(jdate_DataAquisicao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(14, 14, 14))
         );
         jPanel2Layout.setVerticalGroup(
@@ -256,7 +257,7 @@ public class CadastroProdutoView extends javax.swing.JFrame {
                     .addComponent(jLabel11))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jdata_aquisicao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jdate_DataAquisicao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -265,6 +266,13 @@ public class CadastroProdutoView extends javax.swing.JFrame {
         btn_Salvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_SalvarActionPerformed(evt);
+            }
+        });
+
+        btn_voltar.setText("Voltar");
+        btn_voltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_voltarActionPerformed(evt);
             }
         });
 
@@ -277,7 +285,9 @@ public class CadastroProdutoView extends javax.swing.JFrame {
                 .addComponent(btn_Salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
                 .addComponent(lbl_Atualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -285,7 +295,8 @@ public class CadastroProdutoView extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_Salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_Atualizar))
+                    .addComponent(lbl_Atualizar)
+                    .addComponent(btn_voltar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -324,25 +335,25 @@ public class CadastroProdutoView extends javax.swing.JFrame {
 
     private void btn_SalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalvarActionPerformed
         try {
-            String []V = valida();
-            Date data = jdata_aquisicao.getDate();
-            if (V!=null && data!=null) {
+            String[] text = valida();
+            Date data = jdate_DataAquisicao.getDate();
+            if (text!=null && data!=null) {
                 if ("ADD".equals(modotele)) {
-                    if (ProdutoController.salvar(V, data)) {
-                        JOptionPane.showMessageDialog(this, "Adicionado com sucesso");
+                    if (ProdutoController.salvar(text, data)) {
+                        JOptionPane.showMessageDialog(null, "Novo produto adicionado");
                     }else{
-                        JOptionPane.showMessageDialog(this, "falha ao Adicionar");
+                        JOptionPane.showMessageDialog(null, "Falha ao adicionar");
                     }
                 }else{
-                    if (ProdutoController.Alterar(V, data)) {
-                        JOptionPane.showMessageDialog(this, "Atualizado com sucesso");
+                    if (ProdutoController.Alterar(text, data)) {
+                        JOptionPane.showMessageDialog(null, "Produto atualizado");
                     }else{
-                        JOptionPane.showMessageDialog(this, "falha ao Atualizado");
+                        JOptionPane.showMessageDialog(null, "Falha ao atualizar");
                     }
                 }
             }else{
-                JOptionPane.showMessageDialog(this, "Preencha o campo Data de Aquisição");
-            }  
+               JOptionPane.showMessageDialog(null, "preencha o campo data");
+            }
         } catch (ParseException ex) {
             Logger.getLogger(CadastroProdutoView.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -352,12 +363,19 @@ public class CadastroProdutoView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtModeloActionPerformed
 
+    private void btn_voltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_voltarActionPerformed
+        ConsultaProdutoView tela = new ConsultaProdutoView();
+        tela.setVisible(true);
+        
+        CadastroProdutoView.this.dispose();
+    }//GEN-LAST:event_btn_voltarActionPerformed
+
     public String[] valida() throws ParseException{
         String[] text = new String[12];
         text[0] = txtNome.getText();
         text[1] = txtMarca.getText();
         text[2] = txtModelo.getText();
-        text[3] = txtEspecificaçoes.getText();
+        text[3] = jdata_aquisicao.getText();
         text[4] = txtValorVenda.getText().replace(",", ".");
         text[5] = txtValorCompra.getText().replace(",", ".");
         text[6] = txtQuantidade.getText().replace(".", "").replace(",", "");
@@ -500,6 +518,7 @@ public class CadastroProdutoView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Salvar;
+    private javax.swing.JButton btn_voltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -516,12 +535,12 @@ public class CadastroProdutoView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private com.toedter.calendar.JDateChooser jdata_aquisicao;
+    private javax.swing.JTextArea jdata_aquisicao;
+    private com.toedter.calendar.JDateChooser jdate_DataAquisicao;
     private javax.swing.JLabel lbl_Atualizar;
     private javax.swing.JFormattedTextField txtCNPJ;
     private javax.swing.JFormattedTextField txtContato;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextArea txtEspecificaçoes;
     private javax.swing.JTextField txtForneceador;
     private javax.swing.JTextField txtMarca;
     private javax.swing.JTextField txtModelo;
