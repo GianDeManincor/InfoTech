@@ -54,7 +54,7 @@ public class ConsultaProdutoView extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jLabel1.setText("Consotra por");
+        jLabel1.setText("Consulta por");
 
         jLabel2.setText("Na Coluna");
 
@@ -75,7 +75,7 @@ public class ConsultaProdutoView extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(txt_pesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                .addComponent(txt_pesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)

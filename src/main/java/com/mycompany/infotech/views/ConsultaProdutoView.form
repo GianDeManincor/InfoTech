@@ -70,7 +70,7 @@
                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                  <Component id="txt_pesquisa" pref="184" max="32767" attributes="0"/>
+                  <Component id="txt_pesquisa" pref="186" max="32767" attributes="0"/>
                   <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
@@ -100,7 +100,7 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Consotra por"/>
+            <Property name="text" type="java.lang.String" value="Consulta por"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_pesquisa">
