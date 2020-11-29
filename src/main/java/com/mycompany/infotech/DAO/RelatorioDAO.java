@@ -35,7 +35,7 @@ public class RelatorioDAO {
         try {
             conexao = GerenciadorConexao.abrirConexao();
             
-            instrucaoSQL = conexao.prepareStatement("SELECT cliente.cod_C, cliente.Nome, cliente.CPF, SUM(Pedido.Valor_Todal) FROM cliente "
+            instrucaoSQL = conexao.prepareStatement("SELECT cliente.cod_C, cliente.Nome, cliente.CPF, SUM(Pedido.Valor_Total) FROM cliente "
                     + "INNER JOIN pedido ON cliente.cod_C = pedido.fk_codC "
                     + "WHERE Pedido.Data_criacao BETWEEN ? AND ? GROUP BY Cliente.cod_C;");
             
@@ -49,7 +49,7 @@ public class RelatorioDAO {
                 r.setIDC(rs.getInt("cod_C"));
                 r.setNomeC(rs.getString("Nome"));
                 r.setCPF(rs.getString("CPF"));
-                r.setValorTodal(rs.getDouble("SUM(Pedido.Valor_Todal)"));
+                r.setValorTodal(rs.getDouble("SUM(Pedido.Valor_Total)"));
                 
                 RSC.add(r);
             }
@@ -90,7 +90,7 @@ public class RelatorioDAO {
         try {
             conexao = GerenciadorConexao.abrirConexao();
             
-            instrucaoSQL = conexao.prepareStatement("SELECT cliente.cod_C, cliente.Nome, cliente.CPF, Pedido.cod_P, SUM(Item.QTD_Item), Pedido.Valor_Todal, Pedido.Data_Criacao FROM cliente "
+            instrucaoSQL = conexao.prepareStatement("SELECT cliente.cod_C, cliente.Nome, cliente.CPF, Pedido.cod_P, SUM(Item.QTD_Item), Pedido.Valor_Total, Pedido.Data_Criacao FROM cliente "
                     + "INNER JOIN pedido on cliente.cod_C = pedido.fk_codC "
                     + "INNER JOIN Item on pedido.cod_P = Item.fk_codP "
                     + "WHERE Pedido.Data_criacao BETWEEN ? AND ? GROUP BY Pedido.cod_P;");
@@ -107,7 +107,7 @@ public class RelatorioDAO {
                 r.setCPF(rs.getString("CPF"));
                 r.setIDP(rs.getInt("cod_P"));
                 r.setQTDI(rs.getInt("sum(Item.QTD_Item)"));
-                r.setValorTodal(rs.getDouble("Valor_Todal"));
+                r.setValorTodal(rs.getDouble("Valor_Total"));
                 r.setData_criacao(rs.getDate("Data_Criacao"));
                 
                 RAC.add(r);

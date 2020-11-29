@@ -238,8 +238,8 @@ public class TelaVendasView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Não é possível finalizar a venda sem um cliente.");
         }else {
             if(vendasController.cadastrarCompra(getPedido())){
-            JOptionPane.showMessageDialog(null, "Venda realizada com sucesso!");
-            limpar("limparGeral");
+                JOptionPane.showMessageDialog(null, "Venda realizada com sucesso!");
+                limpar("limparGeral");
             }else {
                 JOptionPane.showMessageDialog(null, "Houve um problema, tente novamente!");
             }
