@@ -5,6 +5,8 @@
  */
 package com.mycompany.infotech.models;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Gian
@@ -13,6 +15,7 @@ public class Pedido {
     
     private int idCliente;
     private double valor;
+    private ArrayList<Item> listItem = new ArrayList<>();
     private String dataPedido;
 
     public int getIdCliente() {
@@ -37,6 +40,14 @@ public class Pedido {
 
     public void setDataPedido(String dataPedido) {
         this.dataPedido = dataPedido;
+    }
+
+    public ArrayList<Item> getListItem() {
+        return listItem;
+    }
+
+    public void setListItem(ArrayList<Item> listItem) {
+        this.listItem = listItem;
     }
     
 }

@@ -8,8 +8,8 @@ package com.mycompany.infotech.views;
 import com.mycompany.infotech.controller.VendasController;
 import com.mycompany.infotech.models.Cliente;
 import com.mycompany.infotech.models.Item;
+import com.mycompany.infotech.models.Pedido;
 import com.mycompany.infotech.models.Produto;
-import com.mycompany.infotech.models.Venda;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -221,18 +221,16 @@ public class TelaVendasView extends javax.swing.JFrame {
 
     private void btnConfirmar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmar
 
-        if(vendasController.cadastrarCompra(getVenda())){
-            
+        if(vendasController.cadastrarCompra(getPedido())){
+            JOptionPane.showMessageDialog(null, "Venda realizada com sucesso!");
+            limpar();
         }else {
-            
+            JOptionPane.showMessageDialog(null, "Houve um problema, tente novamente!");
         }
     }//GEN-LAST:event_btnConfirmar
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-        tmProduto.setRowCount(0);
-        lblValorTotal.setText("");
-        txtProduto.setText("");
-        txtQuantidade.setText("");
+        limpar();
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -296,23 +294,22 @@ public class TelaVendasView extends javax.swing.JFrame {
     ArrayList<Item> listItem = new ArrayList<>();
     Item item = new Item();
     
-    public Venda getVenda(){
-        Venda venda = new Venda();
-        double valorTotal = 0;
+    public Pedido getPedido(){
+        Pedido pedido = new Pedido();
         
         for(int linha=0; linha<tblVendas.getRowCount();linha++){
             item.setId(Integer.valueOf(String.valueOf(tblVendas.getModel().getValueAt(linha,0))));
             item.setNome(String.valueOf(tblVendas.getModel().getValueAt(linha,1)));
-            valorTotal += Double.valueOf(String.valueOf(tblVendas.getModel().getValueAt(linha,0)));
+            
             item.setQuantidade(Integer.valueOf(String.valueOf(tblVendas.getModel().getValueAt(linha,3))));
             listItem.add(item);
         }
         
-        venda.setClienteID(cliente.getID());
-        venda.setListItem(listItem);
-        venda.setValor(valorTotal);
+        pedido.setIdCliente(cliente.getID());
+        pedido.setListItem(listItem);
+        pedido.setValor(valorTotal);
         
-        return venda;
+        return pedido;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -358,5 +355,12 @@ public class TelaVendasView extends javax.swing.JFrame {
             validar = true;
         }
         
+    }
+
+    private void limpar() {
+        tmProduto.setRowCount(0);
+        lblValorTotal.setText("");
+        txtProduto.setText("");
+        txtQuantidade.setText("");
     }
 }

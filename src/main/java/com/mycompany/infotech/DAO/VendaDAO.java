@@ -7,8 +7,8 @@ package com.mycompany.infotech.DAO;
 
 
 import com.mycompany.infotech.models.Item;
+import com.mycompany.infotech.models.Pedido;
 import com.mycompany.infotech.models.Produto;
-import com.mycompany.infotech.models.Venda;
 import com.mycompany.infotech.utils.GerenciadorConexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -27,7 +27,7 @@ public class VendaDAO {
     GerenciadorConexao conexao = new GerenciadorConexao();
     
     
-    public boolean salvar(Venda venda){
+    public boolean salvar(Pedido pedido){
         
         Connection conexao = null;
         PreparedStatement instrucaoSQL = null;
@@ -41,7 +41,7 @@ public class VendaDAO {
             
             ResultSet rs = instrucaoSQL.executeQuery();
             
-            for(Item item : venda.getListItem()){
+            for(Item item : pedido.getListItem()){
                 
             }
            

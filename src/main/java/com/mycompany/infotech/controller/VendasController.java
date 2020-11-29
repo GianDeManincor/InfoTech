@@ -6,8 +6,8 @@
 package com.mycompany.infotech.controller;
 
 import com.mycompany.infotech.DAO.VendaDAO;
+import com.mycompany.infotech.models.Pedido;
 import com.mycompany.infotech.models.Produto;
-import com.mycompany.infotech.models.Venda;
 import java.util.ArrayList;
 
 /**
@@ -23,8 +23,8 @@ public class VendasController {
         return vendaDao.pesquisarProduto(produto);
     }
 
-    public boolean cadastrarCompra(Venda venda) {
-       vendaDao.salvar(venda);
+    public boolean cadastrarCompra(Pedido pedido) {
+       vendaDao.salvar(pedido);
        return true;
     }
     
