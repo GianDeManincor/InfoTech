@@ -6,6 +6,7 @@
 package com.mycompany.infotech.models;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -16,7 +17,7 @@ public class Pedido {
     private int idCliente;
     private double valor;
     private ArrayList<Item> listItem = new ArrayList<>();
-    private String dataPedido;
+    private Date dataPedido;
 
     public int getIdCliente() {
         return idCliente;
@@ -34,14 +35,6 @@ public class Pedido {
         this.valor = valor;
     }
 
-    public String getDataPedido() {
-        return dataPedido;
-    }
-
-    public void setDataPedido(String dataPedido) {
-        this.dataPedido = dataPedido;
-    }
-
     public ArrayList<Item> getListItem() {
         return listItem;
     }
@@ -49,5 +42,14 @@ public class Pedido {
     public void setListItem(ArrayList<Item> listItem) {
         this.listItem = listItem;
     }
+
+    public Date getDataPedido() {
+        return dataPedido;
+    }
+
+    public void setDataPedido(Date dataPedido) {
+        this.dataPedido = dataPedido;
+    }
+    
     
 }

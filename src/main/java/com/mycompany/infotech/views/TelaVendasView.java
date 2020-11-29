@@ -10,6 +10,12 @@ import com.mycompany.infotech.models.Cliente;
 import com.mycompany.infotech.models.Item;
 import com.mycompany.infotech.models.Pedido;
 import com.mycompany.infotech.models.Produto;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -311,6 +317,9 @@ public class TelaVendasView extends javax.swing.JFrame {
             listItem.add(item);
         }
         
+        LocalDate now = LocalDate.now();
+        
+        pedido.setDataPedido(Date.from(now.atStartOfDay(ZoneId.systemDefault()).toInstant()));
         pedido.setIdCliente(cliente.getID());
         pedido.setListItem(listItem);
         pedido.setValor(valorTotal);
