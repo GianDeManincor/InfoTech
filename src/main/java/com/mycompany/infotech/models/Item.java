@@ -12,7 +12,7 @@ package com.mycompany.infotech.models;
 public class Item {
     
     private int id;
-    private String produto;
+    private String nome;
     private double valor;
     private int quantidade;
 
@@ -24,12 +24,12 @@ public class Item {
         this.id = id;
     }
 
-    public String getProduto() {
-        return produto;
+    public String getNome() {
+        return nome;
     }
 
-    public void setProduto(String produto) {
-        this.produto = produto;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public double getValor() {

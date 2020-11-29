@@ -14,6 +14,7 @@ import java.util.ArrayList;
  */
 public class Venda {
     
+    private int clienteID;
     private ArrayList<Item> listItem = new ArrayList<>();
     private double valor;
 
@@ -31,6 +32,14 @@ public class Venda {
 
     public void setListItem(ArrayList<Item> listItem) {
         this.listItem = listItem;
+    }
+
+    public int getClienteID() {
+        return clienteID;
+    }
+
+    public void setClienteID(int clienteID) {
+        this.clienteID = clienteID;
     }
     
 }

@@ -8,6 +8,7 @@ package com.mycompany.infotech.controller;
 import com.mycompany.infotech.DAO.VendaDAO;
 import com.mycompany.infotech.models.Produto;
 import com.mycompany.infotech.models.Venda;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,7 +19,7 @@ public class VendasController {
     
     VendaDAO vendaDao = new VendaDAO();
     
-    public Produto pesquisarProduto(String produto){
+    public ArrayList<Produto> pesquisarProduto(String produto){
         return vendaDao.pesquisarProduto(produto);
     }
 

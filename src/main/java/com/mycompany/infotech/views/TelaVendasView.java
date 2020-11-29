@@ -6,9 +6,13 @@
 package com.mycompany.infotech.views;
 
 import com.mycompany.infotech.controller.VendasController;
+import com.mycompany.infotech.models.Cliente;
 import com.mycompany.infotech.models.Item;
+import com.mycompany.infotech.models.Produto;
 import com.mycompany.infotech.models.Venda;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,13 +23,25 @@ public class TelaVendasView extends javax.swing.JFrame {
     /**
      * Creates new form TelaVendas
      */
-    
+    Cliente cliente = new Cliente();
+    DefaultTableModel tmProduto = new DefaultTableModel();
     VendasController vendasController = new VendasController();
+    Produto produto = new Produto();
+    double valorTotal = 0;
+    boolean validar = false;
+    boolean temQuantidade = true;
     
     public TelaVendasView() {
         initComponents();
     }
-
+    
+    public TelaVendasView(Cliente cliente) {
+        initComponents();
+        this.cliente = cliente;
+        txtNomeCliente.setText(cliente.getNome());
+    }   
+        
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,9 +63,8 @@ public class TelaVendasView extends javax.swing.JFrame {
         btnLimpar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        javax.swing.JTextField txtQuantidade = new javax.swing.JTextField();
-        javax.swing.JTextField jTextField3 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
+        txtQuantidade = new javax.swing.JTextField();
+        txtNomeCliente = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -132,14 +147,7 @@ public class TelaVendasView extends javax.swing.JFrame {
 
         jLabel3.setText("Qnt:");
 
-        jTextField3.setEnabled(false);
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
-            }
-        });
-
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/infotech/views/images/iconUsuario.png"))); // NOI18N
+        txtNomeCliente.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -152,13 +160,13 @@ public class TelaVendasView extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtProduto)
-                        .addGap(18, 18, 18)
+                        .addGap(26, 26, 26)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
                         .addComponent(btnPesquisarProduto)
-                        .addGap(119, 119, 119))
+                        .addGap(23, 23, 23))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,11 +176,7 @@ public class TelaVendasView extends javax.swing.JFrame {
                                 .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnLimpar, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField3)))
+                            .addComponent(txtNomeCliente))
                         .addGap(33, 33, 33)
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -187,18 +191,16 @@ public class TelaVendasView extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(txtProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel1)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
+                            .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(btnPesquisarProduto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(txtNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -227,19 +229,32 @@ public class TelaVendasView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConfirmar
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-        // TODO add your handling code here:
+        tmProduto.setRowCount(0);
+        lblValorTotal.setText("");
+        txtProduto.setText("");
+        txtQuantidade.setText("");
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
+        TelaVendasView.this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
-
     private void btnPesquisarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarProdutoActionPerformed
-        vendasController.pesquisarProduto(txtProduto.getText());
+        produto = !vendasController.pesquisarProduto(txtProduto.getText()).isEmpty()
+                ? vendasController.pesquisarProduto(txtProduto.getText()).get(0)
+                : null;
+        if(produto != null){
+            verificaQuantidadeEstoque(Integer.valueOf(txtQuantidade.getText()), produto.getQuantidade());
+            if(temQuantidade){
+                somaValor(Integer.valueOf(txtQuantidade.getText()), produto.getValor_venda());
+                adicionarProdutoTabela(produto, txtQuantidade.getText());
+            }     
+        } else {
+            JOptionPane.showMessageDialog(null, "O produto informado não existe.");
+            txtProduto.setText("");
+            txtQuantidade.setText("");
+        }
+        
     }//GEN-LAST:event_btnPesquisarProdutoActionPerformed
 
     /**
@@ -287,12 +302,13 @@ public class TelaVendasView extends javax.swing.JFrame {
         
         for(int linha=0; linha<tblVendas.getRowCount();linha++){
             item.setId(Integer.valueOf(String.valueOf(tblVendas.getModel().getValueAt(linha,0))));
-            item.setProduto(String.valueOf(tblVendas.getModel().getValueAt(linha,1)));
+            item.setNome(String.valueOf(tblVendas.getModel().getValueAt(linha,1)));
             valorTotal += Double.valueOf(String.valueOf(tblVendas.getModel().getValueAt(linha,0)));
             item.setQuantidade(Integer.valueOf(String.valueOf(tblVendas.getModel().getValueAt(linha,3))));
             listItem.add(item);
         }
         
+        venda.setClienteID(cliente.getID());
         venda.setListItem(listItem);
         venda.setValor(valorTotal);
         
@@ -307,11 +323,40 @@ public class TelaVendasView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField lblValorTotal;
     private javax.swing.JTable tblVendas;
+    private javax.swing.JTextField txtNomeCliente;
     private javax.swing.JTextField txtProduto;
+    private javax.swing.JTextField txtQuantidade;
     // End of variables declaration//GEN-END:variables
+
+    private void somaValor(Integer quantidadeCompra, double valorProduto) {
+        valorTotal += valorProduto * quantidadeCompra;
+        lblValorTotal.setText(String.valueOf(valorTotal));
+    }
+
+    private void verificaQuantidadeEstoque(Integer quantidadeCompra, int quantidadeEstoque) {
+        if(quantidadeCompra > quantidadeEstoque) {
+            JOptionPane.showMessageDialog(null, "O produto informado possui " + quantidadeEstoque + " unidades em estoque.");
+            temQuantidade = false;
+        }
+    }
+
+    private void adicionarProdutoTabela(Produto produto, String quantidade) {
+        if(validar){
+            tmProduto.addRow(new Object[] {produto.getID(), produto.getValor_venda(), produto.getNome_Produto(), quantidade});
+        }else {
+            tmProduto.addColumn("ID");
+            tmProduto.addColumn("PREÇO");
+            tmProduto.addColumn("PRODUTO");
+            tmProduto.addColumn("QUANTIDADE");
+
+            tblVendas.setModel(tmProduto);
+            tmProduto.addRow(new Object[] {produto.getID(), produto.getValor_venda(), produto.getNome_Produto(), quantidade});
+            validar = true;
+        }
+        
+    }
 }

@@ -20,7 +20,7 @@ public class GerenciadorConexao {
     
     public static String SERVER = "localhost";
     public static String DATABASE = "PI_InfoTech";        //nome do seu banco de dados
-    public static String PORTA = "3308";
+    public static String PORTA = "3307";
     
     public static String LOGIN = "root";                     //nome de um usuário de seu BD      
     public static String SENHA = "";                         //sua senha de acesso
