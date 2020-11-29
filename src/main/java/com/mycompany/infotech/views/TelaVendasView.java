@@ -78,6 +78,7 @@ public class TelaVendasView extends javax.swing.JFrame {
         btnPesquisarCliente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Vendas");
 
         tblVendas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
