@@ -224,14 +224,18 @@ public class TelaVendasView extends javax.swing.JFrame {
 
         if(vendasController.cadastrarCompra(getPedido())){
             JOptionPane.showMessageDialog(null, "Venda realizada com sucesso!");
-            limpar();
+            limpar("limparGeral");
         }else {
             JOptionPane.showMessageDialog(null, "Houve um problema, tente novamente!");
         }
     }//GEN-LAST:event_btnConfirmar
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-        limpar();
+        if(tblVendas.getSelectedRow() > -1) {  
+            limpar("limparLinhaSelecionada");
+        } else {
+            limpar("limparGeral");
+        }
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -247,6 +251,7 @@ public class TelaVendasView extends javax.swing.JFrame {
             if(temQuantidade){
                 somaValor(Integer.valueOf(txtQuantidade.getText()), produto.getValor_venda());
                 adicionarProdutoTabela(produto, txtQuantidade.getText());
+                limpar("aposPesquisar");
             }     
         } else {
             JOptionPane.showMessageDialog(null, "O produto informado não existe.");
@@ -358,10 +363,24 @@ public class TelaVendasView extends javax.swing.JFrame {
         
     }
 
-    private void limpar() {
-        tmProduto.setRowCount(0);
-        lblValorTotal.setText("");
-        txtProduto.setText("");
-        txtQuantidade.setText("");
+    private void limpar(String tipo) {
+        switch(tipo){
+            case "aposPesquisar":
+                txtProduto.setText("");
+                txtQuantidade.setText("");
+                break;
+            case "limparGeral":
+                tmProduto.setRowCount(0);
+                lblValorTotal.setText("");
+                txtProduto.setText("");
+                txtQuantidade.setText("");
+                break;
+            case "limparLinhaSelecionada":
+                if(tblVendas.getSelectedRow() >= 0){
+                    tmProduto.removeRow(tblVendas.getSelectedRow());
+                    tblVendas.setModel(tmProduto);
+                }
+                break;
+        }
     }
 }
