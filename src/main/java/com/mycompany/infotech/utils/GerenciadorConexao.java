@@ -9,21 +9,18 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- *
- * @author Icaro
- */
+
 public class GerenciadorConexao {
     
     public static String STATUS = "Não conectado";
-    public static String DRIVER = "com.mysql.cj.jdbc.Driver";  //A partir da versao 8.0, mudou para com.mysql.cj.jdbc.Driver (Connector/J)                   
+    public static String DRIVER = "com.mysql.cj.jdbc.Driver";
     
     public static String SERVER = "localhost";
-    public static String DATABASE = "PI_InfoTech";        //nome do seu banco de dados
+    public static String DATABASE = "PI_InfoTech";
     public static String PORTA = "3308";
     
-    public static String LOGIN = "root";                     //nome de um usuário de seu BD      
-    public static String SENHA = "";                         //sua senha de acesso
+    public static String LOGIN = "root";    
+    public static String SENHA = "";
     public static String URL = "";
     
     public static Connection CONEXAO;
@@ -32,9 +29,8 @@ public class GerenciadorConexao {
  
         URL = "jdbc:mysql://" + SERVER + ":"+PORTA+"/" +DATABASE + "?useTimezone=true&serverTimezone=UTC&useSSL=false";
         
-        if(CONEXAO==null)      
-        {    
-            try {
+        if(CONEXAO==null){    
+            try{
 
                 //Carrega a classe responsável pelo driver
                 Class.forName(DRIVER);
@@ -42,23 +38,21 @@ public class GerenciadorConexao {
 
                 if (CONEXAO != null) {
                     STATUS = "Conexão realizada com sucesso!";
-                } else {
+                }else{
                     STATUS = "Não foi possivel realizar a conexão";
                 }
 
-            } catch (ClassNotFoundException e) {  //Driver não encontrado
+            }catch (ClassNotFoundException e) {  //Driver não encontrado
 
                 throw new ClassNotFoundException("O driver expecificado nao foi encontrado.");
 
-            } catch (SQLException e) {  //Erro ao estabelecer a conexão (Ex: login ou senha errados)
+            }catch (SQLException e) {  //Erro ao estabelecer a conexão (Ex: login ou senha errados)
 
                 //Outra falha de conexão
                 throw new SQLException("Erro ao estabelecer a conexão (Ex: login ou senha errados).");
             }
             
-        }
-        else
-        {
+        }else{
             try {
                 //Se a conexão estiver fechada, reabro a conexão
                 if(CONEXAO.isClosed())
@@ -78,7 +72,7 @@ public class GerenciadorConexao {
  
         boolean retorno = false;
         
-        try {
+        try{
             if(CONEXAO!=null){
                 if(!CONEXAO.isClosed())
                     CONEXAO.close();
@@ -87,7 +81,7 @@ public class GerenciadorConexao {
             STATUS = "Não conectado";
             retorno = true;
             
-        } catch (SQLException e) {
+        }catch (SQLException e) {
             retorno = false;
         }
         

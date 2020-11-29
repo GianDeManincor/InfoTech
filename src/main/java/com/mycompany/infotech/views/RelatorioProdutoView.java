@@ -1,5 +1,11 @@
 package com.mycompany.infotech.views;
 
+import com.mycompany.infotech.controller.RelatorioController;
+import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -17,6 +23,7 @@ public class RelatorioProdutoView extends javax.swing.JFrame {
      */
     public RelatorioProdutoView() {
         initComponents();
+        rbtn_Sintetico.setSelected(true);
     }
 
     /**
@@ -28,71 +35,72 @@ public class RelatorioProdutoView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        TipoRel = new javax.swing.ButtonGroup();
+        Gbnt_TipoRelato = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblSintetico = new javax.swing.JTable();
+        tbl_clinetes = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblAnalitico = new javax.swing.JTable();
-        btnDetalhes = new javax.swing.JButton();
+        tbl_Items = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jFormattedTextField2 = new javax.swing.JFormattedTextField();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jLabel3 = new javax.swing.JLabel();
         btnPesquisar = new javax.swing.JButton();
-        btnAtualizar = new javax.swing.JButton();
+        jdata_inicio = new com.toedter.calendar.JDateChooser();
+        jdata_fim = new com.toedter.calendar.JDateChooser();
         jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        rboAnalitico = new javax.swing.JRadioButton();
-        rboSintetico = new javax.swing.JRadioButton();
+        rbtn_Analitico = new javax.swing.JRadioButton();
+        rbtn_Sintetico = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Relatório de vendas");
 
-        tblSintetico.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_clinetes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
                 "Cliente", "Data", "CPF", "Valor Total"
             }
-        ));
-        jScrollPane1.setViewportView(tblSintetico);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
 
-        tblAnalitico.setModel(new javax.swing.table.DefaultTableModel(
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tbl_clinetes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_clinetesMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tbl_clinetes);
+
+        tbl_Items.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
                 "ID Produto", "Produto", "Quantidade", "Valor Unitario", "Qtd em Estoque"
             }
-        ));
-        jScrollPane2.setViewportView(tblAnalitico);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
 
-        btnDetalhes.setText("Detalhar");
-        btnDetalhes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDetalhesActionPerformed(evt);
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
+        jScrollPane2.setViewportView(tbl_Items);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Periodo", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Periodo", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("De");
 
-        try {
-            jFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-
-        try {
-            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Até");
 
         btnPesquisar.setText("Pesquisar");
@@ -102,61 +110,71 @@ public class RelatorioProdutoView extends javax.swing.JFrame {
             }
         });
 
+        jdata_inicio.setDateFormatString("dd/MM/yyyy");
+
+        jdata_fim.setDateFormatString("dd/MM/yyyy");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(jdata_inicio, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
-                .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jdata_fim, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnPesquisar)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 19, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jdata_inicio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jdata_fim, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnPesquisar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(44, 44, 44))))
         );
-
-        btnAtualizar.setText("Atualizar");
-        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAtualizarActionPerformed(evt);
-            }
-        });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tipo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
-        TipoRel.add(rboAnalitico);
-        rboAnalitico.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        rboAnalitico.setText("Analítico");
-        rboAnalitico.setActionCommand("Analítico");
+        Gbnt_TipoRelato.add(rbtn_Analitico);
+        rbtn_Analitico.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        rbtn_Analitico.setText("Analítico");
+        rbtn_Analitico.setActionCommand("Analitico");
+        rbtn_Analitico.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rbtn_AnaliticoMouseClicked(evt);
+            }
+        });
 
-        TipoRel.add(rboSintetico);
-        rboSintetico.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        rboSintetico.setText("Sintético");
-        rboSintetico.setActionCommand("Sintético");
-        rboSintetico.addActionListener(new java.awt.event.ActionListener() {
+        Gbnt_TipoRelato.add(rbtn_Sintetico);
+        rbtn_Sintetico.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        rbtn_Sintetico.setText("Sintético");
+        rbtn_Sintetico.setActionCommand("Sintetico");
+        rbtn_Sintetico.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rbtn_SinteticoMouseClicked(evt);
+            }
+        });
+        rbtn_Sintetico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rboSinteticoActionPerformed(evt);
+                rbtn_SinteticoActionPerformed(evt);
             }
         });
 
@@ -166,22 +184,19 @@ public class RelatorioProdutoView extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(rboAnalitico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(5, 5, 5))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(rboSintetico, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
-                        .addContainerGap())))
+                .addComponent(rbtn_Sintetico)
+                .addGap(18, 18, 18)
+                .addComponent(rbtn_Analitico)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(rboAnalitico)
-                .addGap(18, 18, 18)
-                .addComponent(rboSintetico)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbtn_Analitico)
+                    .addComponent(rbtn_Sintetico))
+                .addGap(46, 46, 46))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -190,22 +205,16 @@ public class RelatorioProdutoView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jScrollPane1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(5, 5, 5))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnAtualizar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnDetalhes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(8, 8, 8))))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,45 +224,205 @@ public class RelatorioProdutoView extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel4))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnDetalhes, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(127, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                .addContainerGap())
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnDetalhesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalhesActionPerformed
-
-    String TipoRelatorio= TipoRel.getSelection().getActionCommand();
-    
-  
-    }//GEN-LAST:event_btnDetalhesActionPerformed
-
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-        // TODO add your handling code here:
+        if (Gbnt_TipoRelato.getSelection().getActionCommand().equalsIgnoreCase("Sintetico")) {
+            RSC();
+        }else{
+            RAC();
+        }
+
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
-    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+    private void rbtn_SinteticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtn_SinteticoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnAtualizarActionPerformed
+    }//GEN-LAST:event_rbtn_SinteticoActionPerformed
 
-    private void rboSinteticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rboSinteticoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rboSinteticoActionPerformed
+    private void tbl_clinetesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_clinetesMouseClicked
+        if (Gbnt_TipoRelato.getSelection().getActionCommand().equalsIgnoreCase("Sintetico")) {
+            RSP();
+        }else{
+            RAP();
+        }
+    }//GEN-LAST:event_tbl_clinetesMouseClicked
 
+    private void rbtn_SinteticoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtn_SinteticoMouseClicked
+        setTipoR();
+    }//GEN-LAST:event_rbtn_SinteticoMouseClicked
+
+    private void rbtn_AnaliticoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbtn_AnaliticoMouseClicked
+        setTipoR();
+    }//GEN-LAST:event_rbtn_AnaliticoMouseClicked
+
+    /**
+     * função para atualizar o tipo de relatório na tabela cliente
+     */
+    public void setTipoR(){
+        if (tbl_clinetes.getRowCount()>0) {
+            if (Gbnt_TipoRelato.getSelection().getActionCommand().equalsIgnoreCase("Sintetico")) {
+                RSC();
+            }else{
+                RAC();
+            }
+        }
+    }
+    
+    /**
+     * função para gerar um relatório analítico dos itens de um pedido do cliente
+     */
+    public void RAP(){
+        int linha = tbl_clinetes.getSelectedRow();
+        if (linha>=0) {
+            
+            ArrayList<String[]> listaItem = RelatorioController.RAP(Integer.parseInt(tbl_clinetes.getModel().getValueAt(linha, 3).toString()));
+
+            DefaultTableModel tmItem = new DefaultTableModel();
+
+            tmItem.addColumn("Produto");
+            tmItem.addColumn("Marca");
+            tmItem.addColumn("Modelo");
+            tmItem.addColumn("Quantidade");
+            tmItem.addColumn("Valor de Venda");
+            tmItem.addColumn("Valor de Compra");
+            
+            tbl_Items.setModel(tmItem);
+
+            tmItem.setRowCount(0);
+
+            for (String[] p : listaItem){
+                tmItem.addRow(p);
+            }
+
+            tbl_Items.getColumnModel().getColumn(0).setPreferredWidth(150);
+            tbl_Items.getColumnModel().getColumn(1).setPreferredWidth(75);
+            tbl_Items.getColumnModel().getColumn(2).setPreferredWidth(75);
+            tbl_Items.getColumnModel().getColumn(3).setPreferredWidth(20);
+            tbl_Items.getColumnModel().getColumn(4).setPreferredWidth(100);
+            tbl_Items.getColumnModel().getColumn(5).setPreferredWidth(100);
+            
+        }
+    }
+    
+    /**
+     * função para gerar um relatório sintético dos itens de todos pedidos de um cliente em determinado período
+     */
+    public void RSP(){
+        int linha = tbl_clinetes.getSelectedRow();
+        if (linha>=0) {
+            
+            ArrayList<String[]> listaItem = RelatorioController.RSP(Integer.parseInt(tbl_clinetes.getModel().getValueAt(linha, 0).toString()),jdata_inicio.getDate(),jdata_fim.getDate());
+
+            DefaultTableModel tmItem = new DefaultTableModel();
+
+            tmItem.addColumn("Produto");
+            tmItem.addColumn("Quantidade");
+            tmItem.addColumn("Valor total");
+            
+            tbl_Items.setModel(tmItem);
+
+            tmItem.setRowCount(0);
+
+            for (String[] p : listaItem){
+                tmItem.addRow(p);
+            }
+
+            tbl_Items.getColumnModel().getColumn(0).setPreferredWidth(150);
+            tbl_Items.getColumnModel().getColumn(1).setPreferredWidth(20);
+            tbl_Items.getColumnModel().getColumn(2).setPreferredWidth(100);
+        }
+    }
+    
+    /**
+     * função para gerar um relatório analítico dos pedidos de todos os clientes em determinado período
+     */
+    public void RAC(){
+        Date inicio = jdata_inicio.getDate();
+        Date fim = jdata_fim.getDate();
+        
+        if (inicio!=null && fim!=null && inicio.before(fim)) {
+        
+            ArrayList<String[]> listaCliente = RelatorioController.RAC(inicio, fim);
+
+            DefaultTableModel tmCliente = new DefaultTableModel();
+
+            tmCliente.addColumn("ID do Cliente");
+            tmCliente.addColumn("Nome do Cliente");
+            tmCliente.addColumn("CPF");
+            tmCliente.addColumn("ID do Pedido");
+            tmCliente.addColumn("Quantidade de itens");
+            tmCliente.addColumn("Valor de todos pedidos");
+            tmCliente.addColumn("Data da compra");
+
+            tbl_clinetes.setModel(tmCliente);
+
+            tmCliente.setRowCount(0);
+
+            for (String[] p : listaCliente){
+                tmCliente.addRow(p);
+            }
+
+            tbl_clinetes.getColumnModel().getColumn(0).setPreferredWidth(20);
+            tbl_clinetes.getColumnModel().getColumn(1).setPreferredWidth(100);
+            tbl_clinetes.getColumnModel().getColumn(2).setPreferredWidth(75);
+            tbl_clinetes.getColumnModel().getColumn(3).setPreferredWidth(20);
+            tbl_clinetes.getColumnModel().getColumn(4).setPreferredWidth(20);
+            tbl_clinetes.getColumnModel().getColumn(5).setPreferredWidth(125);
+            tbl_clinetes.getColumnModel().getColumn(6).setPreferredWidth(100);
+        }else{
+            JOptionPane.showMessageDialog(this, "Data inválida\nverifique os campos das datas");
+        }
+    }
+    
+    /**
+     * função para gerar um relatório sintético dos pedidos de todos os clientes agrupados por cliente em determinado período
+     */
+    public void RSC(){
+        Date inicio = jdata_inicio.getDate();
+        Date fim = jdata_fim.getDate();
+        
+        if (inicio!=null && fim!=null && inicio.before(fim)) {
+        
+            ArrayList<String[]> listaCliente = RelatorioController.RSC(inicio, fim);
+
+            DefaultTableModel tmCliente = new DefaultTableModel();
+
+            tmCliente.addColumn("ID Cliente");
+            tmCliente.addColumn("Nome do Cliente");
+            tmCliente.addColumn("CPF");
+            tmCliente.addColumn("Valor de todos pedidos");
+
+            tbl_clinetes.setModel(tmCliente);
+
+            tmCliente.setRowCount(0);
+
+            for (String[] p : listaCliente){
+                tmCliente.addRow(p);
+            }
+
+            tbl_clinetes.getColumnModel().getColumn(0).setPreferredWidth(20);
+            tbl_clinetes.getColumnModel().getColumn(1).setPreferredWidth(150);
+            tbl_clinetes.getColumnModel().getColumn(2).setPreferredWidth(50);
+            tbl_clinetes.getColumnModel().getColumn(3).setPreferredWidth(125);
+        }else{
+            JOptionPane.showMessageDialog(this, "Data inválida\nverifique os campos das datas");
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -281,6 +450,8 @@ public class RelatorioProdutoView extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -291,12 +462,8 @@ public class RelatorioProdutoView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup TipoRel;
-    private javax.swing.JButton btnAtualizar;
-    private javax.swing.JButton btnDetalhes;
+    private javax.swing.ButtonGroup Gbnt_TipoRelato;
     private javax.swing.JButton btnPesquisar;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JFormattedTextField jFormattedTextField2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -304,9 +471,11 @@ public class RelatorioProdutoView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JRadioButton rboAnalitico;
-    private javax.swing.JRadioButton rboSintetico;
-    private javax.swing.JTable tblAnalitico;
-    private javax.swing.JTable tblSintetico;
+    private com.toedter.calendar.JDateChooser jdata_fim;
+    private com.toedter.calendar.JDateChooser jdata_inicio;
+    private javax.swing.JRadioButton rbtn_Analitico;
+    private javax.swing.JRadioButton rbtn_Sintetico;
+    private javax.swing.JTable tbl_Items;
+    private javax.swing.JTable tbl_clinetes;
     // End of variables declaration//GEN-END:variables
 }

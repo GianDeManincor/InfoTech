@@ -6,8 +6,8 @@
 package com.mycompany.infotech.views;
 
 import com.mycompany.infotech.models.Produto;
-import com.mycompany.infotech.DAO.ProdutoDAO;
 import com.mycompany.infotech.controller.ProdutoController;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -58,9 +58,9 @@ public class ConsultaProdutoView extends javax.swing.JFrame {
 
         jLabel2.setText("Na Coluna");
 
-        cmb_coluna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Nome do Produto", "Marca", "Modelo", "Especificaçoes", "Nome do Fornecedor", "CNPJ", "Contato", "E-mail", "Quantidade", "Valor de Compra", "Valor de Venda", "Data de Aquisição" }));
+        cmb_coluna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Nome do Produto", "Marca", "Modelo", "Especificaçoes", "Nome do Fornecedor", "CNPJ", "Contato", "E-mail", "Quantidade", "Valor de Compra", "Valor de Venda" }));
 
-        btn_busca.setText("Busca");
+        btn_busca.setText("Buscar");
         btn_busca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_buscaActionPerformed(evt);
@@ -223,6 +223,9 @@ public class ConsultaProdutoView extends javax.swing.JFrame {
         setTable();
     }//GEN-LAST:event_btn_atualizartabelaActionPerformed
     
+    /**
+     * função para buscar um elemento em determinada colunada da tabela produto
+     */
     public void Busca(){
         //JOptionPane.showMessageDialog(null, "cmb "+cmb_coluna.getSelectedItem()+" txt "+txt_pesquisa.getText());
         if (campos(cmb_coluna.getSelectedIndex(), txt_pesquisa.getText())){
@@ -272,11 +275,14 @@ public class ConsultaProdutoView extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * função para excluir um produto
+     */
     public void Excluir(){
-        if (tbl_produto.getSelectedRow()>0) {
+        if (tbl_produto.getSelectedRow()>=0) {
             int nulinha = tbl_produto.getSelectedRow();
             
-            int proceed = JOptionPane.showConfirmDialog(this,"Tem certeza que deseja excluir produto?\n"+tbl_produto.getModel().getValueAt(nulinha, 1).toString(),"Excluir",JOptionPane.YES_NO_OPTION);
+            int proceed = JOptionPane.showConfirmDialog(this,"Tem certeza que deseja excluir este produto?\nNome do Produto "+tbl_produto.getModel().getValueAt(nulinha, 1).toString(),"Excluir",JOptionPane.YES_NO_OPTION);
             
             if (proceed == JOptionPane.YES_OPTION) {
                 
@@ -289,13 +295,16 @@ public class ConsultaProdutoView extends javax.swing.JFrame {
                 setTable();
                 
             }else{
-                JOptionPane.showMessageDialog(this, "Cancelada a exclusão");
+                JOptionPane.showMessageDialog(this, "Exclusão Cancelada\nA Exclusão do Produto "+tbl_produto.getModel().getValueAt(nulinha, 1).toString()+" Não foi concluída");
             }
         }else{
             JOptionPane.showMessageDialog(this, "Selecione um produto");
         }
     }
     
+    /**
+     * função para chamar a tela de cadastro de produto
+     */
     public void add(){
         CadastroProdutoView tela = new CadastroProdutoView();
         tela.setVisible(true);
@@ -303,12 +312,17 @@ public class ConsultaProdutoView extends javax.swing.JFrame {
         ConsultaProdutoView.this.dispose();
     }
     
+    /**
+     * função para chamar a tela de alteração dos dados do produdo
+     */
     public void Atualizar(){
         if (tbl_produto.getSelectedRow()>=0) {
             
             Produto p = new Produto();
             int nulinha = tbl_produto.getSelectedRow();
             int er =0;
+            
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
             
             try {
 
@@ -336,10 +350,7 @@ public class ConsultaProdutoView extends javax.swing.JFrame {
                 er++;
                 p.setEmail(tbl_produto.getModel().getValueAt(nulinha, 11).toString());
                 er++;
-                //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                //java.sql.Date date = sdf.parse(tbl_produto.getModel().getValueAt(nulinha, 12).toString());
-                //System.out.println(date);
-                //p.setData_aquisicao(DataFormat(tbl_produto.getModel().getValueAt(nulinha, 12).toString()));
+                p.setData_aquisicao(formato.parse(tbl_produto.getModel().getValueAt(nulinha, 12).toString()));
 
                 CadastroProdutoView tela = new CadastroProdutoView(p);
                 tela.setVisible(true);
@@ -347,6 +358,8 @@ public class ConsultaProdutoView extends javax.swing.JFrame {
                 ConsultaProdutoView.this.dispose();
 
             } /*catch (ParseException ex) {
+                System.out.println("Erro "+er+" de conversão");
+                System.out.println(ex); /*catch (ParseException ex) {
                 System.out.println("Erro "+er+" de conversão");
                 System.out.println(ex);
             }*/catch (NumberFormatException ex){
@@ -362,6 +375,12 @@ public class ConsultaProdutoView extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * função para validar os campos
+     * @param text String a ser validada
+     * @param item int identifique o tipo de validar
+     * @return boolean retornar <b>true</b> se o campo de acordo. se não retorna <b>false</b>
+     */
     public boolean campos(int item, String text){
         String[] linha ={"ID","Nome do Produto","Marca","Modelo","Especificaçoes","Nome do Fornecedor","CNPJ","Contato","E-mail","Quantidade","Valor de Compra","Valor de Venda","Data de Aquisição"};
         try {       
@@ -430,6 +449,9 @@ public class ConsultaProdutoView extends javax.swing.JFrame {
         return true;
     }
     
+    /**
+     * função para Popular a tabela produto
+     */
     public void setTable(){
         
         ArrayList<String[]> listaProduto = ProdutoController.selecionar();
@@ -494,6 +516,8 @@ public class ConsultaProdutoView extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ConsultaProdutoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

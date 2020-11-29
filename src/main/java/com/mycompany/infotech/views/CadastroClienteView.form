@@ -300,7 +300,7 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel8">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Cidada"/>
+            <Property name="text" type="java.lang.String" value="Cidade"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txt_cidade">
@@ -414,6 +414,11 @@
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbl_text">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Dialog" size="14" style="3"/>
+            </Property>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
