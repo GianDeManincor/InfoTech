@@ -18,7 +18,7 @@ public class GerenciadorConexao {
     public static String SERVER = "localhost";
   
     public static String DATABASE = "PI_InfoTech";
-    public static String PORTA = "3308";
+    public static String PORTA = "3307";
 
     public static String LOGIN = "root";    
     public static String SENHA = "";

@@ -51,7 +51,7 @@ public class RelatorioProdutoView extends javax.swing.JFrame {
         rbtn_Analitico = new javax.swing.JRadioButton();
         rbtn_Sintetico = new javax.swing.JRadioButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Relatório de vendas");
 
         tbl_clinetes.setModel(new javax.swing.table.DefaultTableModel(
@@ -109,10 +109,6 @@ public class RelatorioProdutoView extends javax.swing.JFrame {
                 btnPesquisarActionPerformed(evt);
             }
         });
-
-        jdata_inicio.setDateFormatString("dd/MM/yyyy");
-
-        jdata_fim.setDateFormatString("dd/MM/yyyy");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

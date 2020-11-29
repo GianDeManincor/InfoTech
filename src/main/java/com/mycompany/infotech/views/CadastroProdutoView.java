@@ -92,7 +92,7 @@ public class CadastroProdutoView extends javax.swing.JFrame {
         lbl_Atualizar = new javax.swing.JLabel();
         btn_voltar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Produto");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados do Item", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
@@ -194,8 +194,6 @@ public class CadastroProdutoView extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
-        jdate_DataAquisicao.setDateFormatString("dd/MM/yyyy");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -215,7 +213,7 @@ public class CadastroProdutoView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtForneceador)
-                    .addComponent(txtCNPJ, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                    .addComponent(txtCNPJ)
                     .addComponent(txtValorVenda)
                     .addComponent(txtValorCompra)
                     .addComponent(txtQuantidade)

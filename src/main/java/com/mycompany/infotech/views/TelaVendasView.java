@@ -66,7 +66,7 @@ public class TelaVendasView extends javax.swing.JFrame {
         txtQuantidade = new javax.swing.JTextField();
         txtNomeCliente = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         tblVendas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -213,6 +213,7 @@ public class TelaVendasView extends javax.swing.JFrame {
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnCancelar, btnConfirmar, btnLimpar});
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProdutoActionPerformed

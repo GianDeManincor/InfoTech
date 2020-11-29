@@ -6,7 +6,7 @@
     </Component>
   </NonVisualComponents>
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="title" type="java.lang.String" value="Relat&#xf3;rio de vendas"/>
   </Properties>
   <SyntheticProperties>
@@ -203,14 +203,8 @@
           </Events>
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="jdata_inicio">
-          <Properties>
-            <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
-          </Properties>
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="jdata_fim">
-          <Properties>
-            <Property name="dateFormatString" type="java.lang.String" value="dd/MM/yyyy"/>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>

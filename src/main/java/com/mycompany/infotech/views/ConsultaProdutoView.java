@@ -49,7 +49,7 @@ public class ConsultaProdutoView extends javax.swing.JFrame {
         btn_Adicionar = new javax.swing.JButton();
         btn_atualizartabela = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consulta de produto");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));

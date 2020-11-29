@@ -52,7 +52,7 @@ public class ConsultaClienteView extends javax.swing.JFrame {
         btn_Excluir1 = new javax.swing.JButton();
         btn_pedido = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consulta de Cliente");
 
         tbl_cliente.setModel(new javax.swing.table.DefaultTableModel(
@@ -142,7 +142,7 @@ public class ConsultaClienteView extends javax.swing.JFrame {
             }
         });
 
-        btn_pedido.setText("Nova Pedido");
+        btn_pedido.setText("Novo Pedido");
         btn_pedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_pedidoActionPerformed(evt);
