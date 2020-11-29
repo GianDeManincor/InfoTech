@@ -50,7 +50,7 @@ public class ClienteDAO {
                 c.setCPF(rs.getString("CPF"));
                 c.setCidade(rs.getString("Cidade"));
                 c.setEstado(rs.getString("Estado"));
-                c.setEndereco(rs.getString("Esdereso"));
+                c.setEndereco(rs.getString("Endereso"));
                 
                 listaClientes.add(c);
             }
@@ -134,7 +134,7 @@ public class ClienteDAO {
                     rs = instrucaoSQL.executeQuery();
                 break;
                 case "Endereso":
-                    instrucaoSQL = conexao.prepareStatement("SELECT * FROM Cliente WHERE Esdereso LIKE ? ");
+                    instrucaoSQL = conexao.prepareStatement("SELECT * FROM Cliente WHERE Endereso LIKE ? ");
                     instrucaoSQL.setString(1, "%"+Busca+"%");
                     rs = instrucaoSQL.executeQuery();
                 break;
@@ -150,7 +150,7 @@ public class ClienteDAO {
                 c.setCPF(rs.getString("CPF"));
                 c.setCidade(rs.getString("cidade"));
                 c.setEstado(rs.getString("estado"));
-                c.setEndereco(rs.getString("esdereso"));
+                c.setEndereco(rs.getString("endereso"));
                 
                 listaClientes.add(c);
             }
@@ -247,7 +247,7 @@ public class ClienteDAO {
             en++;
             
             //Error 2
-            instrucaoSQL = conexao.prepareStatement("INSERT INTO Cliente (Nome,Datanaci,Sexo,Email,CPF,Cidade,Estado,Esdereso) VALUES (?,?,?,?,?,?,?,?)");
+            instrucaoSQL = conexao.prepareStatement("INSERT INTO Cliente (Nome,Datanaci,Sexo,Email,CPF,Cidade,Estado,Endereso) VALUES (?,?,?,?,?,?,?,?)");
             
             instrucaoSQL.setString(1, cli.getNome());
             instrucaoSQL.setDate(2, new java.sql.Date(cli.getDatanaci().getTime()));
@@ -312,7 +312,7 @@ public class ClienteDAO {
             conexao = GerenciadorConexao.abrirConexao();
             er++;
             //Error 2
-            instrucaoSQL = conexao.prepareStatement("UPDATE Cliente SET Nome = ?, Datanaci = ?, Sexo = ?, Email = ?, Cidade = ?, Estado = ?, Esdereso = ? WHERE cod_C = ?");
+            instrucaoSQL = conexao.prepareStatement("UPDATE Cliente SET Nome = ?, Datanaci = ?, Sexo = ?, Email = ?, Cidade = ?, Estado = ?, Endereso = ? WHERE cod_C = ?");
             er++;
             //Error 3
             instrucaoSQL.setString(1, c.getNome());
