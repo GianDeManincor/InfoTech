@@ -111,7 +111,9 @@ public class TelaVendasView extends javax.swing.JFrame {
         jLabel2.setText("TOTAL:");
 
         lblValorTotal.setBackground(new java.awt.Color(240, 240, 240));
+        lblValorTotal.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblValorTotal.setBorder(null);
+        lblValorTotal.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -157,6 +159,7 @@ public class TelaVendasView extends javax.swing.JFrame {
 
         jLabel3.setText("Qnt:");
 
+        txtNomeCliente.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtNomeCliente.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -386,10 +389,12 @@ public class TelaVendasView extends javax.swing.JFrame {
                 txtQuantidade.setText("");
                 break;
             case "limparGeral":
+                listItem.clear();
                 tmProduto.setRowCount(0);
                 lblValorTotal.setText("");
                 txtProduto.setText("");
                 txtQuantidade.setText("");
+                
                 break;
             case "limparLinhaSelecionada":
                 if(tblVendas.getSelectedRow() >= 0){
