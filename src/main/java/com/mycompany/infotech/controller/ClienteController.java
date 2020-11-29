@@ -13,6 +13,7 @@ import java.util.Date;
 
 /**
  * Controller de solicitações e manipulação de dados do Cliente ao banco de dados
+ * @author lucas vinicius
  * @author Icaro
  */
 public class ClienteController {
