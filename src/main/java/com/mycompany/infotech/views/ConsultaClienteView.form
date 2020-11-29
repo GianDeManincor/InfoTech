@@ -34,7 +34,7 @@
                       <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="14" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -134,15 +134,14 @@
         <Component class="javax.swing.JComboBox" name="cmb_coluna">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="8">
+              <StringArray count="7">
                 <StringItem index="0" value="ID"/>
                 <StringItem index="1" value="Nome"/>
-                <StringItem index="2" value="Data de nascimento "/>
-                <StringItem index="3" value="Sexo"/>
-                <StringItem index="4" value="CPF"/>
-                <StringItem index="5" value="Cidade"/>
-                <StringItem index="6" value="Estado"/>
-                <StringItem index="7" value="Endereso"/>
+                <StringItem index="2" value="Sexo"/>
+                <StringItem index="3" value="CPF"/>
+                <StringItem index="4" value="Cidade"/>
+                <StringItem index="5" value="Estado"/>
+                <StringItem index="6" value="Endereso"/>
               </StringArray>
             </Property>
           </Properties>
@@ -152,7 +151,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btn_busca">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Busca"/>
+            <Property name="text" type="java.lang.String" value="Buscar"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_buscaActionPerformed"/>
@@ -171,8 +170,10 @@
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Component id="btn_Atualizar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <Component id="btn_pedido" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Component id="btn_atualizartabela" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="18" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Component id="btn_Excluir1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               </Group>
@@ -187,6 +188,7 @@
                       <Component id="btn_Atualizar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btn_atualizartabela" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btn_Excluir1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btn_pedido" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -227,6 +229,14 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_Excluir1ActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btn_pedido">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Nova Pedido"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_pedidoActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

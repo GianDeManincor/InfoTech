@@ -113,7 +113,7 @@
         <Component class="javax.swing.JComboBox" name="cmb_coluna">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="13">
+              <StringArray count="12">
                 <StringItem index="0" value="ID"/>
                 <StringItem index="1" value="Nome do Produto"/>
                 <StringItem index="2" value="Marca"/>
@@ -126,7 +126,6 @@
                 <StringItem index="9" value="Quantidade"/>
                 <StringItem index="10" value="Valor de Compra"/>
                 <StringItem index="11" value="Valor de Venda"/>
-                <StringItem index="12" value="Data de Aquisi&#xe7;&#xe3;o"/>
               </StringArray>
             </Property>
           </Properties>
@@ -136,7 +135,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btn_busca">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Busca"/>
+            <Property name="text" type="java.lang.String" value="Buscar"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_buscaActionPerformed"/>

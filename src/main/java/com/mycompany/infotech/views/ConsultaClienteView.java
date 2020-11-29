@@ -11,7 +11,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -51,6 +50,7 @@ public class ConsultaClienteView extends javax.swing.JFrame {
         btn_Atualizar = new javax.swing.JButton();
         btn_atualizartabela = new javax.swing.JButton();
         btn_Excluir1 = new javax.swing.JButton();
+        btn_pedido = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Consulta de Cliente");
@@ -74,9 +74,9 @@ public class ConsultaClienteView extends javax.swing.JFrame {
 
         jLabel2.setText("Na Coluna");
 
-        cmb_coluna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Nome", "Data de nascimento ", "Sexo", "CPF", "Cidade", "Estado", "Endereso" }));
+        cmb_coluna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Nome", "Sexo", "CPF", "Cidade", "Estado", "Endereso" }));
 
-        btn_busca.setText("Busca");
+        btn_busca.setText("Buscar");
         btn_busca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_buscaActionPerformed(evt);
@@ -142,6 +142,13 @@ public class ConsultaClienteView extends javax.swing.JFrame {
             }
         });
 
+        btn_pedido.setText("Nova Pedido");
+        btn_pedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_pedidoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -152,8 +159,10 @@ public class ConsultaClienteView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btn_Atualizar)
                 .addGap(18, 18, 18)
+                .addComponent(btn_pedido)
+                .addGap(18, 18, 18)
                 .addComponent(btn_atualizartabela)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_Excluir1)
                 .addGap(18, 18, 18))
         );
@@ -165,7 +174,8 @@ public class ConsultaClienteView extends javax.swing.JFrame {
                     .addComponent(btn_Adicionar)
                     .addComponent(btn_Atualizar)
                     .addComponent(btn_atualizartabela)
-                    .addComponent(btn_Excluir1))
+                    .addComponent(btn_Excluir1)
+                    .addComponent(btn_pedido))
                 .addContainerGap())
         );
 
@@ -181,7 +191,7 @@ public class ConsultaClienteView extends javax.swing.JFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,12 +228,47 @@ public class ConsultaClienteView extends javax.swing.JFrame {
     private void btn_Excluir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_Excluir1ActionPerformed
         exclusao();
     }//GEN-LAST:event_btn_Excluir1ActionPerformed
+
+    private void btn_pedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_pedidoActionPerformed
+        System.out.println("item selecionado na tabela cliente "+tbl_cliente.getSelectedRow()+1);
+        if (tbl_cliente.getSelectedRow()>=0){
+            
+            Cliente c = new Cliente();
+            int nulinha = tbl_cliente.getSelectedRow();
+            int er =0;
+            
+            try{
+                
+                c.setID(Integer.parseInt(tbl_cliente.getModel().getValueAt(nulinha, 0).toString()));
+                er++;
+                c.setNome(tbl_cliente.getModel().getValueAt(nulinha, 1).toString());
+                er++;
+                
+                TelaVendasView tela = new TelaVendasView(c);
+                tela.setVisible(true);
+                
+                ConsultaClienteView.this.dispose();
+                
+            }catch (NumberFormatException ex){
+                JOptionPane.showMessageDialog(this, "Erro "+er+"\n"+ex);
+                System.out.println("Erro "+er+" de conversão");
+            }catch (Exception ex){
+                JOptionPane.showMessageDialog(this, "Erro "+er+"\n"+ex);
+                System.out.println("Erro "+er+" de conversão");
+            } 
+        }else{
+            JOptionPane.showMessageDialog(this, "selecione um cliente");
+        }
+    }//GEN-LAST:event_btn_pedidoActionPerformed
     
+    /**
+     * função para excluir um cliente
+     */
     public void exclusao(){
-        if(tbl_cliente.getSelectedRow()>0){
+        if(tbl_cliente.getSelectedRow()>=0){
             int nulinha = tbl_cliente.getSelectedRow();
             
-            int proceed = JOptionPane.showConfirmDialog(this,"Tem certeza que deseja excluir os dados do Cliente "+tbl_cliente.getModel().getValueAt(nulinha, 1).toString()+"?" ,"Excluir",JOptionPane.YES_NO_OPTION);
+            int proceed = JOptionPane.showConfirmDialog(this,"Tem certeza que deseja excluir o cadastro do cliente "+tbl_cliente.getModel().getValueAt(nulinha, 1).toString()+"?" ,"Excluir",JOptionPane.YES_NO_OPTION);
             
             if (proceed == JOptionPane.YES_OPTION) {
                 
@@ -236,20 +281,25 @@ public class ConsultaClienteView extends javax.swing.JFrame {
                 setTable();
                 
             }else{
-                JOptionPane.showMessageDialog(this, "Cancelada a exclusão");
+                JOptionPane.showMessageDialog(this, "Exclusão Cancelada");
             }
         }else{
             JOptionPane.showMessageDialog(this, "Selecione um Cliente");
         }
     }
     
+    /**
+     * função para chamar a tela de alteração dos dados do cliente
+     */
     public void Atualizar(){
-        System.out.println(tbl_cliente.getSelectedRow());
+        System.out.println("item selecionado na tabela cliente "+tbl_cliente.getSelectedRow()+1);
         if (tbl_cliente.getSelectedRow()>=0) {
             
             Cliente c = new Cliente();
             int nulinha = tbl_cliente.getSelectedRow();
             int er =0;
+            
+            SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
             
             try{
                 
@@ -257,8 +307,8 @@ public class ConsultaClienteView extends javax.swing.JFrame {
                 er++;
                 c.setNome(tbl_cliente.getModel().getValueAt(nulinha, 1).toString());
                 er++;
-//                c.setDatanaci(tbl_cliente.getModel().getValueAt(nulinha, 2).toString());
-//                er++;
+                c.setDatanaci(formato.parse(tbl_cliente.getModel().getValueAt(nulinha, 2).toString()));
+                er++;
                 c.setSexo(tbl_cliente.getModel().getValueAt(nulinha, 3).toString());
                 er++;
                 c.setEmail(tbl_cliente.getModel().getValueAt(nulinha, 4).toString());
@@ -281,7 +331,7 @@ public class ConsultaClienteView extends javax.swing.JFrame {
             }catch (NumberFormatException ex){
                 JOptionPane.showMessageDialog(this, "Erro "+er+"\n"+ex);
                 System.out.println("Erro "+er+" de conversão");
-            } catch (Exception ex){
+            }catch (Exception ex){
                 JOptionPane.showMessageDialog(this, "Erro "+er+"\n"+ex);
                 System.out.println("Erro "+er+" de conversão");
             } 
@@ -290,6 +340,9 @@ public class ConsultaClienteView extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * função para chamar a tela de cadastro de cliente
+     */
     public void add(){
         CadastroClienteView tela = new CadastroClienteView();
         tela.setVisible(true);
@@ -297,6 +350,9 @@ public class ConsultaClienteView extends javax.swing.JFrame {
         ConsultaClienteView.this.dispose();
     }
     
+    /**
+     * função para buscar um elemento em determinada colunada da tabela clientes
+     */
     public void Busca(){
         if (camos(cmb_coluna.getSelectedIndex(), txt_pesquisa.getText())) {
             
@@ -333,13 +389,19 @@ public class ConsultaClienteView extends javax.swing.JFrame {
             tbl_cliente.getColumnModel().getColumn(2).setPreferredWidth(50);
             tbl_cliente.getColumnModel().getColumn(3).setPreferredWidth(20);
             tbl_cliente.getColumnModel().getColumn(4).setPreferredWidth(150);
-            tbl_cliente.getColumnModel().getColumn(5).setPreferredWidth(50);
+            tbl_cliente.getColumnModel().getColumn(5).setPreferredWidth(25);
             tbl_cliente.getColumnModel().getColumn(6).setPreferredWidth(50);
             tbl_cliente.getColumnModel().getColumn(7).setPreferredWidth(50);
         
         }
     }
     
+    /**
+     * função para validar os campos
+     * @param text String a ser validada
+     * @param item int identifique o tipo de validar
+     * @return boolean retornar <b>true</b> se o campo de acordo. se não retorna <b>false</b>
+     */
     public boolean camos(int item, String text){
         try {          
             //0 ID,1 Nome,2 data,3 Sexo,4 CPF,5 Cidade,6 Estado,7 Endereso
@@ -359,9 +421,6 @@ public class ConsultaClienteView extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(null, "O Nome excedeu o tamanho do campo");
                             return false;
                         }
-                    case 2:
-                        DataFormat(text);
-                    break;
                     case 3:
                         if ("f".equals(text) || "m".equals(text) || "F".equals(text) || "M".equals(text)) {
                             return true;
@@ -407,6 +466,9 @@ public class ConsultaClienteView extends javax.swing.JFrame {
         return true;
     }
     
+    /**
+     * função para Popular a tabela cliente
+     */
     public void setTable(){
         
         ArrayList<String[]> listaCliente = ClienteController.setClientes();
@@ -441,12 +503,6 @@ public class ConsultaClienteView extends javax.swing.JFrame {
         tbl_cliente.getColumnModel().getColumn(7).setPreferredWidth(50);
     }
     
-    public static String DataFormat(String data) throws ParseException{
-        // dd/MM/yyyy para yyyy/MM/dd
-        Date date = new SimpleDateFormat("dd/MM/yyyy").parse(data);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-        return sdf.format(date);
-    }
     /**
      * @param args the command line arguments
      */
@@ -480,6 +536,14 @@ public class ConsultaClienteView extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -495,6 +559,7 @@ public class ConsultaClienteView extends javax.swing.JFrame {
     private javax.swing.JButton btn_Excluir1;
     private javax.swing.JButton btn_atualizartabela;
     private javax.swing.JButton btn_busca;
+    private javax.swing.JButton btn_pedido;
     private javax.swing.JComboBox<String> cmb_coluna;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

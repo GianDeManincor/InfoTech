@@ -7,8 +7,8 @@ package com.mycompany.infotech.models;
 
 import java.text.ParseException;
 import java.util.Date;
+
 /**
- *
  * @author Gian
  * @author Icaro
  */
@@ -30,6 +30,13 @@ public class Produto {
     private String Fornecedor;
     private Date Data_aquisicao;
     
+    
+    /**
+     * @deprecated 
+     * @param v
+     * @param data
+     * @throws ParseException 
+     */
     public void setProduto(String [] v, Date data) throws ParseException{
         this.Nome_Produto = v[0];
         this.marca = v[1];
@@ -48,22 +55,6 @@ public class Produto {
         }
     }
     
-    public void setAllProduto(int ID, String Nome_Produto, String marca, String modelo, String descricao, double Valor_venda, double Valor_compra, int Quantidade, String CNPJ, String Contato, String Email, String Fornecedor, Date Data_aquisicao){
-        this.ID = ID;
-        this.Nome_Produto = Nome_Produto;
-        this.marca = marca;
-        this.modelo = modelo;
-        this.descricao = descricao;
-        this.Valor_venda = Valor_venda;
-        this.Valor_compra = Valor_compra;
-        this.Quantidade = Quantidade;
-        this.CNPJ = CNPJ;
-        this.Contato = Contato;
-        this.Email = Email;
-        this.Fornecedor = Fornecedor;
-        this.Data_aquisicao = Data_aquisicao;
-    }
-
     public int getID() {
         return ID;
     }

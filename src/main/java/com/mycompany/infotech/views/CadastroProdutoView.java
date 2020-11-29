@@ -8,7 +8,6 @@ package com.mycompany.infotech.views;
 import com.mycompany.infotech.controller.ProdutoController;
 import com.mycompany.infotech.models.Produto;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,6 +31,7 @@ public class CadastroProdutoView extends javax.swing.JFrame {
     
     public CadastroProdutoView(Produto pro) {
         initComponents();
+        
         btn_Salvar.setText("Alterar");
         ID=pro.getID();
         lbl_Atualizar.setText("você está alterando o produto de código: "+ID);
@@ -40,7 +40,7 @@ public class CadastroProdutoView extends javax.swing.JFrame {
         txtNome.setText(pro.getNome_Produto());
         txtMarca.setText(pro.getMarca());
         txtModelo.setText(pro.getModelo());
-        jdata_aquisicao.setText(pro.getDescricao());
+        txtDescricao.setText(pro.getDescricao());
         txtForneceador.setText(pro.getFornecedor());
         txtCNPJ.setText(pro.getCNPJ());
         txtContato.setText(pro.getContato());
@@ -48,7 +48,9 @@ public class CadastroProdutoView extends javax.swing.JFrame {
         txtQuantidade.setText(Integer.toString(pro.getQuantidade()));
         txtValorCompra.setText(String.valueOf(pro.getValor_compra()));
         txtValorVenda.setText(String.valueOf(pro.getValor_venda()));
+        jdate_DataAquisicao.setDate(pro.getData_aquisicao());
     }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -65,7 +67,7 @@ public class CadastroProdutoView extends javax.swing.JFrame {
         txtMarca = new javax.swing.JTextField();
         txtNome = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jdata_aquisicao = new javax.swing.JTextArea();
+        txtDescricao = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
         txtModelo = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
@@ -101,9 +103,9 @@ public class CadastroProdutoView extends javax.swing.JFrame {
 
         jLabel3.setText("Especificaçoes");
 
-        jdata_aquisicao.setColumns(20);
-        jdata_aquisicao.setRows(5);
-        jScrollPane1.setViewportView(jdata_aquisicao);
+        txtDescricao.setColumns(20);
+        txtDescricao.setRows(5);
+        jScrollPane1.setViewportView(txtDescricao);
 
         jLabel4.setText("Modelo");
 
@@ -269,6 +271,8 @@ public class CadastroProdutoView extends javax.swing.JFrame {
             }
         });
 
+        lbl_Atualizar.setFont(new java.awt.Font("Dialog", 3, 14)); // NOI18N
+
         btn_voltar.setText("Voltar");
         btn_voltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -334,28 +338,32 @@ public class CadastroProdutoView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_SalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SalvarActionPerformed
-        try {
-            String[] text = valida();
-            Date data = jdate_DataAquisicao.getDate();
-            if (text!=null && data!=null) {
-                if ("ADD".equals(modotele)) {
-                    if (ProdutoController.salvar(text, data)) {
-                        JOptionPane.showMessageDialog(null, "Novo produto adicionado");
-                    }else{
-                        JOptionPane.showMessageDialog(null, "Falha ao adicionar");
-                    }
+        
+        String[] text = valida();
+        Date data = jdate_DataAquisicao.getDate();
+        
+        if (text!=null && data!=null) {
+            if ("ADD".equals(modotele)) {
+                
+                if (ProdutoController.salvar(text, data)) {
+                    JOptionPane.showMessageDialog(null, "Novo produto adicionado");
+                    ToClean();
                 }else{
-                    if (ProdutoController.Alterar(text, data)) {
-                        JOptionPane.showMessageDialog(null, "Produto atualizado");
-                    }else{
-                        JOptionPane.showMessageDialog(null, "Falha ao atualizar");
-                    }
+                    JOptionPane.showMessageDialog(null, "Falha ao adicionar");
                 }
+                
             }else{
-               JOptionPane.showMessageDialog(null, "preencha o campo data");
+                
+                if (ProdutoController.Alterar(text, data)) {
+                    JOptionPane.showMessageDialog(null, "Produto atualizado");
+                    ToClean();
+                }else{
+                    JOptionPane.showMessageDialog(null, "Falha ao atualizar");
+                }
+                
             }
-        } catch (ParseException ex) {
-            Logger.getLogger(CadastroProdutoView.class.getName()).log(Level.SEVERE, null, ex);
+        }else{
+           JOptionPane.showMessageDialog(null, "preencha o campo data");
         }
     }//GEN-LAST:event_btn_SalvarActionPerformed
 
@@ -370,12 +378,37 @@ public class CadastroProdutoView extends javax.swing.JFrame {
         CadastroProdutoView.this.dispose();
     }//GEN-LAST:event_btn_voltarActionPerformed
 
-    public String[] valida() throws ParseException{
+    /**
+     * função para limpar todos os campos
+     */
+    public void ToClean(){
+        
+        txtNome.setText("");
+        txtMarca.setText("");
+        txtModelo.setText("");
+        txtDescricao.setText("");
+        
+        txtForneceador.setText("");
+        txtCNPJ.setText("");
+        txtContato.setText("");
+        txtEmail.setText("");
+        txtEmail.setText("");
+        txtQuantidade.setText("");
+        txtValorCompra.setText("");
+        txtValorVenda.setText("");
+        jdate_DataAquisicao.setDate(null);
+    }
+    
+    /**
+     * função para formatação dos Campos
+     * @return String[] com os dados dos Campos se for válido, se não for <b>null</b>
+     */
+    public String[] valida(){
         String[] text = new String[12];
         text[0] = txtNome.getText();
         text[1] = txtMarca.getText();
         text[2] = txtModelo.getText();
-        text[3] = jdata_aquisicao.getText();
+        text[3] = txtDescricao.getText();
         text[4] = txtValorVenda.getText().replace(",", ".");
         text[5] = txtValorCompra.getText().replace(",", ".");
         text[6] = txtQuantidade.getText().replace(".", "").replace(",", "");
@@ -397,6 +430,12 @@ public class CadastroProdutoView extends javax.swing.JFrame {
         return text;
     }
     
+    /**
+     * função para validar os campos
+     * @param text String a ser validada
+     * @param item int identifique o tipo de validar
+     * @return boolean retornar <b>true</b> se o campo de acordo. se não retorna <b>false</b>
+     */
     public boolean campos(int item, String text){
         String[] linha ={"Nome do Produto","Marca","Modelo","Especificaçoes","Nome do Fornecedor","CNPJ","Contato","E-mail","Quantidade","Valor de Compra","Valor de Venda","Data de Aquisição"};
         try {       
@@ -452,9 +491,6 @@ public class CadastroProdutoView extends javax.swing.JFrame {
                     case 5:
                         m = Double.parseDouble(text);
                         return true;
-                    case 11:
-                        DataFormat(text);
-                        return true;
                 }
             }
         } catch (Exception e) {
@@ -462,20 +498,6 @@ public class CadastroProdutoView extends javax.swing.JFrame {
             return false;
         }
         return true;
-    }
-    
-    /**
-     *
-     * @param data
-     * @return
-     * @throws ParseException 
-     * @deprecated
-     */
-    public static String DataFormat(String data) throws ParseException{
-        // dd/MM/yyyy para yyyy/MM/dd
-        Date date = new SimpleDateFormat("dd/MM/yyyy").parse(data);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-        return sdf.format(date);
     }
     
     /**
@@ -503,6 +525,10 @@ public class CadastroProdutoView extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(CadastroProdutoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -535,11 +561,11 @@ public class CadastroProdutoView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jdata_aquisicao;
     private com.toedter.calendar.JDateChooser jdate_DataAquisicao;
     private javax.swing.JLabel lbl_Atualizar;
     private javax.swing.JFormattedTextField txtCNPJ;
     private javax.swing.JFormattedTextField txtContato;
+    private javax.swing.JTextArea txtDescricao;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtForneceador;
     private javax.swing.JTextField txtMarca;
