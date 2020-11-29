@@ -234,13 +234,16 @@ public class TelaVendasView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtProdutoActionPerformed
 
     private void btnConfirmar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmar
-
-        if(vendasController.cadastrarCompra(getPedido())){
+        if(txtNomeCliente.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Não é possível finalizar a venda sem um cliente.");
+        }else {
+            if(vendasController.cadastrarCompra(getPedido())){
             JOptionPane.showMessageDialog(null, "Venda realizada com sucesso!");
             limpar("limparGeral");
-        }else {
-            JOptionPane.showMessageDialog(null, "Houve um problema, tente novamente!");
-        }
+            }else {
+                JOptionPane.showMessageDialog(null, "Houve um problema, tente novamente!");
+            }
+        }  
     }//GEN-LAST:event_btnConfirmar
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
