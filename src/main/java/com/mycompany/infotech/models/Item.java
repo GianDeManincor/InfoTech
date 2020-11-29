@@ -13,7 +13,7 @@ public class Item {
     
     private int id;
     private String nome;
-    private double valor;
+    private Double valor;
     private int quantidade;
 
     public int getId() {
@@ -32,11 +32,11 @@ public class Item {
         this.nome = nome;
     }
 
-    public double getValor() {
+    public Double getValor() {
         return valor;
     }
 
-    public void setValor(double valor) {
+    public void setValor(Double valor) {
         this.valor = valor;
     }
 

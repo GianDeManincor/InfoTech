@@ -5,12 +5,12 @@
  */
 package com.mycompany.infotech.DAO;
 
-
 import com.mycompany.infotech.models.Item;
 import com.mycompany.infotech.models.Pedido;
 import com.mycompany.infotech.models.Produto;
 import com.mycompany.infotech.utils.GerenciadorConexao;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,24 +31,62 @@ public class VendaDAO {
         
         Connection conexao = null;
         PreparedStatement instrucaoSQL = null;
-        
-        
+        boolean retorno = false;
+        int en=1;
         
         try {
             
             conexao = GerenciadorConexao.abrirConexao();
-            instrucaoSQL = conexao.prepareStatement("INSET INTO " );
+            en++;
             
+            instrucaoSQL = conexao.prepareStatement("INSERT INTO Pedido (fk_codC, Valor_Total, Data_Criacao) VALUES (?,?,?)" );
+            
+            instrucaoSQL.setInt(1, pedido.getIdCliente());
+            instrucaoSQL.setDouble(2, pedido.getValor());
+            instrucaoSQL.setDate(3, new java.sql.Date(pedido.getDataPedido().getTime()));
+            en++;
+            
+            System.out.println(instrucaoSQL);
+            int linhasAfetadas = instrucaoSQL.executeUpdate();
+            
+            en++;
+            
+            if(linhasAfetadas > 0){
+                retorno = true;
+                instrucaoSQL = null;
+            }
+            
+            instrucaoSQL = conexao.prepareStatement("SELECT * FROM Pedido ORDER BY cod_P DESC LIMIT 1" );
             ResultSet rs = instrucaoSQL.executeQuery();
             
-            for(Item item : pedido.getListItem()){
-                
+            while(rs.next()){
+                pedido.setId(rs.getInt("cod_P"));
             }
-           
+            instrucaoSQL = null;
+            linhasAfetadas = 0;
+            for(Item item : pedido.getListItem()){
+                instrucaoSQL = conexao.prepareStatement("INSERT INTO item (fk_codP, fk_codE, QTD_Item, Valor_Item) VALUES (?,?,?,?)");
+                instrucaoSQL.setInt(1, pedido.getId());
+                instrucaoSQL.setInt(2, item.getId());
+                instrucaoSQL.setInt(3, item.getQuantidade());
+                instrucaoSQL.setDouble(4, item.getValor());
+                
+                linhasAfetadas += instrucaoSQL.executeUpdate();
+                instrucaoSQL = null;
+            }
+            
+            if(linhasAfetadas > 0){
+                retorno = true;
+                instrucaoSQL = null;
+            }
+            
+            
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(VendaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Erro ao carregar o driver! \nError "+en+" \n"+ex);
+            retorno = false;
         } catch (SQLException ex) {
-            Logger.getLogger(VendaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Erro ao abrir a conexão! \nError "+en+" \n"+ex);
+            retorno = false;
         }finally{
             try{
                 if (instrucaoSQL!=null) {
@@ -62,7 +100,7 @@ public class VendaDAO {
             
         }
         
-        return false;
+        return retorno;
     }
     
     public ArrayList<Produto> pesquisarProduto(String nomeProduto){

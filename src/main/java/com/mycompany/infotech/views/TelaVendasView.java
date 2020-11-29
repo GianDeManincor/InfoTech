@@ -10,13 +10,17 @@ import com.mycompany.infotech.models.Cliente;
 import com.mycompany.infotech.models.Item;
 import com.mycompany.infotech.models.Pedido;
 import com.mycompany.infotech.models.Produto;
-import java.sql.Date;
+import static com.sun.org.apache.xerces.internal.impl.dtd.XMLDTDLoader.LOCALE;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -261,8 +265,7 @@ public class TelaVendasView extends javax.swing.JFrame {
             }     
         } else {
             JOptionPane.showMessageDialog(null, "O produto informado não existe.");
-            txtProduto.setText("");
-            txtQuantidade.setText("");
+            limpar("aposPesquisar");
         }
         
     }//GEN-LAST:event_btnPesquisarProdutoActionPerformed
@@ -304,28 +307,32 @@ public class TelaVendasView extends javax.swing.JFrame {
     }
     
     ArrayList<Item> listItem = new ArrayList<>();
-    Item item = new Item();
-    
+   
     public Pedido getPedido(){
         Pedido pedido = new Pedido();
-        
         for(int linha=0; linha<tblVendas.getRowCount();linha++){
+            Item item = new Item();
             item.setId(Integer.valueOf(String.valueOf(tblVendas.getModel().getValueAt(linha,0))));
             item.setNome(String.valueOf(tblVendas.getModel().getValueAt(linha,1)));
-            
+            item.setValor(Double.valueOf(String.valueOf(tblVendas.getModel().getValueAt(linha,2))));
             item.setQuantidade(Integer.valueOf(String.valueOf(tblVendas.getModel().getValueAt(linha,3))));
             listItem.add(item);
         }
+ 
+        String data = LocalDate.now().toString();
+        SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date dataCompra = formatDate.parse(data);
+            pedido.setDataPedido(dataCompra);
+        } catch (ParseException ex) {
+            Logger.getLogger(TelaVendasView.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-        LocalDate now = LocalDate.now();
-        
-        pedido.setDataPedido(Date.from(now.atStartOfDay(ZoneId.systemDefault()).toInstant()));
         pedido.setIdCliente(cliente.getID());
         pedido.setListItem(listItem);
         pedido.setValor(valorTotal);
-        
         return pedido;
-    }
+    }    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
@@ -358,15 +365,15 @@ public class TelaVendasView extends javax.swing.JFrame {
 
     private void adicionarProdutoTabela(Produto produto, String quantidade) {
         if(validar){
-            tmProduto.addRow(new Object[] {produto.getID(), produto.getValor_venda(), produto.getNome_Produto(), quantidade});
+            tmProduto.addRow(new Object[] {produto.getID(), produto.getNome_Produto(), produto.getValor_venda() , quantidade});
         }else {
             tmProduto.addColumn("ID");
-            tmProduto.addColumn("PREÇO");
             tmProduto.addColumn("PRODUTO");
+            tmProduto.addColumn("PREÇO");
             tmProduto.addColumn("QUANTIDADE");
 
             tblVendas.setModel(tmProduto);
-            tmProduto.addRow(new Object[] {produto.getID(), produto.getValor_venda(), produto.getNome_Produto(), quantidade});
+            tmProduto.addRow(new Object[] {produto.getID(), produto.getNome_Produto(), produto.getValor_venda() , quantidade});
             validar = true;
         }
         

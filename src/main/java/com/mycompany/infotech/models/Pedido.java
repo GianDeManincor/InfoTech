@@ -14,6 +14,7 @@ import java.util.Date;
  */
 public class Pedido {
     
+    private int id;
     private int idCliente;
     private double valor;
     private ArrayList<Item> listItem = new ArrayList<>();
@@ -50,6 +51,13 @@ public class Pedido {
     public void setDataPedido(Date dataPedido) {
         this.dataPedido = dataPedido;
     }
-    
-    
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+     
 }
