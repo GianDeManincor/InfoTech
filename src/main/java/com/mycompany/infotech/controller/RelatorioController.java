@@ -37,7 +37,7 @@ public class RelatorioController {
         
         for (Relatorio r : listaRelatorioDAO) {
             listaRetono.add(new String[]{String.valueOf(r.getIDC()),
-                r.getNomeC(),r.getCPF(),String.valueOf(r.getValorTodal())});
+                r.getNomeC(),r.getCPF(),String.valueOf(r.getValorTotal())});
         }
         
         return listaRetono;
@@ -64,7 +64,7 @@ public class RelatorioController {
         
         for (Relatorio r : listaRelatorioDAO) {
             listaRetono.add(new String[]{String.valueOf(r.getIDC()),
-                r.getNomeC(),r.getCPF(),String.valueOf(r.getIDP()),String.valueOf(r.getQTDI()),String.valueOf(r.getValorTodal()),
+                r.getNomeC(),r.getCPF(),String.valueOf(r.getIDP()),String.valueOf(r.getQTDI()),String.valueOf(r.getValorTotal()),
                 String.valueOf(form.format(r.getData_criacao()))});
         }
         

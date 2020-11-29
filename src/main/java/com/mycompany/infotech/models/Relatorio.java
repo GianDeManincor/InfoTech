@@ -24,7 +24,7 @@ public class Relatorio {
     private String NomeP;
     private String Marca;
     private String Modelo;
-    private double ValorTodal;
+    private double ValorTotal;
     private double ValorItemVenda;
     private double ValorItemCompra;
 
@@ -116,12 +116,12 @@ public class Relatorio {
         this.Modelo = Modelo;
     }
 
-    public double getValorTodal() {
-        return ValorTodal;
+    public double getValorTotal() {
+        return ValorTotal;
     }
 
-    public void setValorTodal(double ValorTodal) {
-        this.ValorTodal = ValorTodal;
+    public void setValorTotal(double ValorTotal) {
+        this.ValorTotal = ValorTotal;
     }
 
     public double getValorItemVenda() {

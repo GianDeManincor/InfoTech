@@ -5,37 +5,44 @@
  */
 package com.mycompany.infotech.models;
 
+import java.util.Date;
+
 /**
- *
+ * @author Icaro
  * @author Gian
  */
 public class Pedido {
     
-    private int idCliente;
-    private double valor;
-    private String dataPedido;
+    private int IDP;
+    private int IDC;
+    private double valor = 0;
+    private Date dataPedido;
 
-    public int getIdCliente() {
-        return idCliente;
+    public int getIDP() {
+        return IDP;
     }
 
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
+    public void setIDP(int IDP) {
+        this.IDP = IDP;
+    }
+    
+    public int getIDC() {
+        return IDC;
+    }
+
+    public void setIDC(int IDC) {
+        this.IDC = IDC;
     }
 
     public double getValor() {
         return valor;
     }
 
-    public void setValor(double valor) {
-        this.valor = valor;
-    }
-
-    public String getDataPedido() {
+    public Date getDataPedido() {
         return dataPedido;
     }
 
-    public void setDataPedido(String dataPedido) {
+    public void setDataPedido(Date dataPedido) {
         this.dataPedido = dataPedido;
     }
     

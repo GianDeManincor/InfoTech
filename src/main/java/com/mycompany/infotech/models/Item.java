@@ -6,46 +6,49 @@
 package com.mycompany.infotech.models;
 
 /**
- *
+ * @author Icaro
  * @author Gian
  */
 public class Item {
     
-    private int id;
-    private String nome;
-    private double valor;
-    private int quantidade;
+    private int IDP;
+    private int IDE;
+    private double valorItem;
+    private int QTD;
 
-    public int getId() {
-        return id;
+    public int getIDP() {
+        return IDP;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIDP(int IDP) {
+        this.IDP = IDP;
     }
 
-    public String getNome() {
-        return nome;
+    
+    public int getIDE() {
+        return IDE;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setIDE(int IDE) {
+        this.IDE = IDE;
     }
 
-    public double getValor() {
-        return valor;
+    public double getValorItem() {
+        return valorItem;
     }
 
-    public void setValor(double valor) {
-        this.valor = valor;
+    public void setValorItem(double valorItem) {
+        this.valorItem = valorItem;
     }
 
-    public int getQuantidade() {
-        return quantidade;
+    public int getQTD() {
+        return QTD;
     }
 
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
+    public void setQTD(int QTD) {
+        this.QTD = QTD;
     }
+
+    
     
 }
