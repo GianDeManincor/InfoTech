@@ -7,10 +7,9 @@ package com.mycompany.infotech.views;
 
 import com.mycompany.infotech.controller.VendasController;
 import com.mycompany.infotech.models.Cliente;
-import com.mycompany.infotech.models.Item;
 import com.mycompany.infotech.models.Produto;
-import com.mycompany.infotech.models.Venda;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,11 +22,10 @@ public class TelaVendasView extends javax.swing.JFrame {
     /**
      * Creates new form TelaVendas
      */
-    Cliente cliente = new Cliente();
-    DefaultTableModel tmProduto = new DefaultTableModel();
+    
+    private int IDC;
     VendasController vendasController = new VendasController();
-    Produto produto = new Produto();
-    double valorTotal = 0;
+    DefaultTableModel tmProduto = new DefaultTableModel();
     boolean validar = false;
     boolean temQuantidade = true;
     
@@ -35,10 +33,10 @@ public class TelaVendasView extends javax.swing.JFrame {
         initComponents();
     }
     
-    public TelaVendasView(Cliente cliente) {
+    public TelaVendasView(Cliente c) {
         initComponents();
-        this.cliente = cliente;
-        txtNomeCliente.setText(cliente.getNome());
+        txtNomeCliente.setText(c.getNome());
+        IDC = c.getID();
     }   
         
    
@@ -220,14 +218,45 @@ public class TelaVendasView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtProdutoActionPerformed
 
     private void btnConfirmar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmar
-
-        if(vendasController.cadastrarCompra(getVenda())){
+        int tbl = tblVendas.getRowCount();
+        int QTD_ERRO[] = new int[tbl];
+        
+        if (tbl>0) {
             
-        }else {
+            Date data = new Date(System.currentTimeMillis());
+            System.out.println(VendasController.getPedido());
             
+            if (VendasController.ADDPedido(IDC, data)){
+                
+                int IDped = VendasController.getPedido();
+                
+                for (int i = 0; i < tbl; i++) {
+                    if (!VendasController.ADDItem(IDped, Integer.parseInt(tblVendas.getModel().getValueAt(i, 0).toString()), Integer.parseInt(tblVendas.getModel().getValueAt(i, 3).toString()), Double.parseDouble(tblVendas.getModel().getValueAt(i, 1).toString()))) {
+                        QTD_ERRO[i]=1;
+                    }
+                }
+                JOptionPane.showMessageDialog(this, "Pedido finalizado");
+                for (int i = 0; i < tbl; i++) {
+                    if (QTD_ERRO[i]==1) {
+                        System.out.println("Erro no item"+i);
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Erro ao iniciar o pedido");
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "Adicione um item ao pedido");
         }
+        
     }//GEN-LAST:event_btnConfirmar
 
+    public void ToClean(){
+        tmProduto.setRowCount(0);
+        lblValorTotal.setText("");
+        txtProduto.setText("");
+        txtQuantidade.setText("");
+    }
+    
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
         tmProduto.setRowCount(0);
         lblValorTotal.setText("");
@@ -240,21 +269,17 @@ public class TelaVendasView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnPesquisarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarProdutoActionPerformed
-        produto = !vendasController.pesquisarProduto(txtProduto.getText()).isEmpty()
-                ? vendasController.pesquisarProduto(txtProduto.getText()).get(0)
-                : null;
+        Produto produto = !vendasController.pesquisarProduto(txtProduto.getText()).isEmpty()?vendasController.pesquisarProduto(txtProduto.getText()).get(0): null;
         if(produto != null){
             verificaQuantidadeEstoque(Integer.valueOf(txtQuantidade.getText()), produto.getQuantidade());
             if(temQuantidade){
-                somaValor(Integer.valueOf(txtQuantidade.getText()), produto.getValor_venda());
                 adicionarProdutoTabela(produto, txtQuantidade.getText());
-            }     
+            } 
         } else {
             JOptionPane.showMessageDialog(null, "O produto informado não existe.");
             txtProduto.setText("");
             txtQuantidade.setText("");
         }
-        
     }//GEN-LAST:event_btnPesquisarProdutoActionPerformed
 
     /**
@@ -292,28 +317,7 @@ public class TelaVendasView extends javax.swing.JFrame {
             }
         });
     }
-    
-    ArrayList<Item> listItem = new ArrayList<>();
-    Item item = new Item();
-    
-    public Venda getVenda(){
-        Venda venda = new Venda();
-        double valorTotal = 0;
-        
-        for(int linha=0; linha<tblVendas.getRowCount();linha++){
-            item.setId(Integer.valueOf(String.valueOf(tblVendas.getModel().getValueAt(linha,0))));
-            item.setNome(String.valueOf(tblVendas.getModel().getValueAt(linha,1)));
-            valorTotal += Double.valueOf(String.valueOf(tblVendas.getModel().getValueAt(linha,0)));
-            item.setQuantidade(Integer.valueOf(String.valueOf(tblVendas.getModel().getValueAt(linha,3))));
-            listItem.add(item);
-        }
-        
-        venda.setClienteID(cliente.getID());
-        venda.setListItem(listItem);
-        venda.setValor(valorTotal);
-        
-        return venda;
-    }
+  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
@@ -332,18 +336,14 @@ public class TelaVendasView extends javax.swing.JFrame {
     private javax.swing.JTextField txtQuantidade;
     // End of variables declaration//GEN-END:variables
 
-    private void somaValor(Integer quantidadeCompra, double valorProduto) {
-        valorTotal += valorProduto * quantidadeCompra;
-        lblValorTotal.setText(String.valueOf(valorTotal));
-    }
-
+    
     private void verificaQuantidadeEstoque(Integer quantidadeCompra, int quantidadeEstoque) {
         if(quantidadeCompra > quantidadeEstoque) {
             JOptionPane.showMessageDialog(null, "O produto informado possui " + quantidadeEstoque + " unidades em estoque.");
             temQuantidade = false;
         }
     }
-
+    
     private void adicionarProdutoTabela(Produto produto, String quantidade) {
         if(validar){
             tmProduto.addRow(new Object[] {produto.getID(), produto.getValor_venda(), produto.getNome_Produto(), quantidade});
