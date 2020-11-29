@@ -16,9 +16,10 @@ public class GerenciadorConexao {
     public static String DRIVER = "com.mysql.cj.jdbc.Driver";
     
     public static String SERVER = "localhost";
+  
     public static String DATABASE = "PI_InfoTech";
     public static String PORTA = "3308";
-    
+
     public static String LOGIN = "root";    
     public static String SENHA = "";
     public static String URL = "";

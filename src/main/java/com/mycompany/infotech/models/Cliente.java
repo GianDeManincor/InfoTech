@@ -94,5 +94,4 @@ public class Cliente {
     public void setEndereco(String Endereco) {
         this.Endereco = Endereco;
     }
-    
 }
