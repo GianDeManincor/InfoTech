@@ -11,7 +11,7 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
- * @author Icaro
+ *
  * @author ateos
  */
 public class CadastroClienteView extends javax.swing.JFrame {
@@ -21,20 +21,22 @@ public class CadastroClienteView extends javax.swing.JFrame {
      */
     public CadastroClienteView() {
         initComponents();
-        
-        Gbtn_sexo.add(rbtn_F);
-        Gbtn_sexo.add(rbtn_M);
     }
     
     private int ID;
     private String modotela="ADD";
     
+    /**
+     * tela de alteração dos dados do cliente
+     * @param cli dados atuais do cliente
+     */
     public CadastroClienteView(Cliente cli){
         initComponents();
         
         modotela="Alterar";
         btn_cadastrar.setText("Alterar");
-        lbl_text.setText("você está alterando os dados do cliente "+ID);
+        ftxt_CPF.setEnabled(false);
+        lbl_text.setText("você está alterando os dados do cliente "+cli.getID());
         
         ID=cli.getID();
         txt_nome.setText(cli.getNome());
@@ -43,7 +45,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
         txt_cidade.setText(cli.getCidade());
         txt_endereco.setText(cli.getEndereco());
         cmb_estado.setSelectedItem(cli.getEstado());
-        //jdata_nacimento.setDate(cli.getDatanaci());
+        jdata_nacimento.setDate(cli.getDatanaci());
         
         if (cli.getSexo()!=null) {
             if ("F".equals(cli.getSexo())) {
@@ -205,7 +207,7 @@ public class CadastroClienteView extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados do endereço"));
 
-        jLabel8.setText("Cidada");
+        jLabel8.setText("Cidade");
 
         jLabel9.setText("Endereço");
 
@@ -271,6 +273,8 @@ public class CadastroClienteView extends javax.swing.JFrame {
                 btn_cadastrarActionPerformed(evt);
             }
         });
+
+        lbl_text.setFont(new java.awt.Font("Dialog", 3, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -362,6 +366,9 @@ public class CadastroClienteView extends javax.swing.JFrame {
         CadastroClienteView.this.dispose();
     }//GEN-LAST:event_btn_voltraActionPerformed
 
+    /**
+     * função para limpar todos os campos
+     */
     public void ToClean(){
         txt_cidade.setText("");
         txt_email.setText("");
@@ -373,32 +380,56 @@ public class CadastroClienteView extends javax.swing.JFrame {
         rbtn_M.setSelected(false);
     }
     
+    /**
+     * função para alterar os dados do cliente
+     */
     public void Alterar(){
         String[] text = valida();
         Date data = jdata_nacimento.getDate();
+        
         if (text!=null && data!=null) {
+            
             if (ClienteController.Alterar(data, getSexo(), ID, text)) {
                 JOptionPane.showMessageDialog(null, "Atualizado com sucesso");
                 ToClean();
             }else{
                 JOptionPane.showMessageDialog(null, "Erro ao atualizar");
             }
+            
+        }else{
+            JOptionPane.showMessageDialog(null, "Preencha o campo Data de nascimento");
         }
     }
     
+    /**
+     * função para adicionar cliente
+     */
     public void add(){
         String[] text = valida();
         Date data = jdata_nacimento.getDate();
+        
         if (text!=null && data!=null) {
-            if (ClienteController.salvar(data, getSexo(), text)) {
-                JOptionPane.showMessageDialog(null, "Novo cliente cadastrado");
-                ToClean();
+            if (ClienteController.ValidarCPF(text[2])){
+                
+                if (ClienteController.salvar(data, getSexo(), text)) {
+                    JOptionPane.showMessageDialog(null, "Novo cliente cadastrado");
+                    ToClean();
+                }else{
+                    JOptionPane.showMessageDialog(null, "Erro cadastrar");
+                }
+                
             }else{
-                JOptionPane.showMessageDialog(null, "Erro cadastrar");
+                JOptionPane.showMessageDialog(null, "CPF inválido");
             }
+        }else{
+            JOptionPane.showMessageDialog(null, "Preencha o campo Data de nascimento");
         }
     }
     
+    /**
+     * função para formatação dos Campos
+     * @return String[] com os dados dos Campos se for válido, se não for <b>null</b>
+     */
     public String[] valida(){
         String[] txt = new String[6];
         
@@ -418,6 +449,12 @@ public class CadastroClienteView extends javax.swing.JFrame {
         return txt;
     }
     
+    /**
+     * função para validar os campos
+     * @param txt String a ser validada
+     * @param i int identifique o tipo de validar
+     * @return boolean retornar <b>true</b> se o campo de acordo. se não retorna <b>false</b>
+     */
     public boolean fromato(String txt, int i){
         String[] linha = {"Nome e sobrenome","Email","CPF","Cidade","Estado","Endereço"};
         
@@ -468,6 +505,10 @@ public class CadastroClienteView extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * função para retornar o sexo do cliente
+     * @return String retorna <b>~</b> se não escolher nenhuma das opções. retorna <b>F</b> se escolher feminino. retorna <b>M</b> se escolher masculino.
+     */
     public String getSexo(){
         if (rbtn_F.getSelectedObjects()!=null || rbtn_M.getSelectedObjects()!=null) {
             if (rbtn_F.getSelectedObjects()!=null){
@@ -505,6 +546,8 @@ public class CadastroClienteView extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(CadastroClienteView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
