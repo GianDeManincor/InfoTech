@@ -250,7 +250,10 @@ public class TelaVendasView extends javax.swing.JFrame {
         if(txtNomeCliente.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Não é possível finalizar a venda sem um cliente.");
         }else {
-            if(vendasController.cadastrarCompra(getPedido())){
+            if(tblVendas.getRowCount() > -1) {
+                JOptionPane.showMessageDialog(null, "Adicione no minimo um produto para concluir a venda.");
+            }
+            else if(vendasController.cadastrarCompra(getPedido())){
                 JOptionPane.showMessageDialog(null, "Venda realizada com sucesso!");
                 limpar("limparGeral");
             }else {
@@ -273,6 +276,9 @@ public class TelaVendasView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnPesquisarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarProdutoActionPerformed
+        if(txtProduto.getText().isEmpty() && txtQuantidade.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Preencha o campo Produto e campo Quantidade para realizar a venda.");
+        }
         produto = !vendasController.pesquisarProduto(txtProduto.getText()).isEmpty()
                 ? vendasController.pesquisarProduto(txtProduto.getText()).get(0)
                 : null;
