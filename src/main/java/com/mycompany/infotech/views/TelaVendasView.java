@@ -25,7 +25,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * Tela de vendas
  * @author Gian
  */
 public class TelaVendasView extends javax.swing.JFrame {
@@ -255,6 +255,7 @@ public class TelaVendasView extends javax.swing.JFrame {
                 limpar("limparGeral");
             }else {
                 JOptionPane.showMessageDialog(null, "Houve um problema, tente novamente!");
+                limpar("limparGeral");
             }
         }  
     }//GEN-LAST:event_btnConfirmar
@@ -333,6 +334,9 @@ public class TelaVendasView extends javax.swing.JFrame {
     
     ArrayList<Item> listItem = new ArrayList<>();
    
+    /**
+    * metodo que faz o tratamento do pedido do cliente para enviar a controller
+    */
     public Pedido getPedido(){
         Pedido pedido = new Pedido();
         for(int linha=0; linha<tblVendas.getRowCount();linha++){
@@ -377,11 +381,17 @@ public class TelaVendasView extends javax.swing.JFrame {
     private javax.swing.JTextField txtQuantidade;
     // End of variables declaration//GEN-END:variables
 
+    /**
+    * metodo que faz a soma dos valores de cada item para apresentar na tela
+    */
     private void somaValor(Integer quantidadeCompra, double valorProduto) {
         valorTotal += valorProduto * quantidadeCompra;
         lblValorTotal.setText(String.valueOf(valorTotal));
     }
 
+    /**
+    * metodo que verifica a quantidade em estoque com a quantidade que o cliente deseja comprar
+    */
     private void verificaQuantidadeEstoque(Integer quantidadeCompra, int quantidadeEstoque) {
         if(quantidadeCompra > quantidadeEstoque) {
             JOptionPane.showMessageDialog(null, "O produto informado possui " + quantidadeEstoque + " unidades em estoque.");
@@ -389,6 +399,9 @@ public class TelaVendasView extends javax.swing.JFrame {
         }
     }
 
+    /**
+    * metodo adiciona o produto na tela de vendas
+    */
     private void adicionarProdutoTabela(Produto produto, String quantidade) {
         if(validar){
             tmProduto.addRow(new Object[] {produto.getID(), produto.getNome_Produto(), produto.getValor_venda() , quantidade});

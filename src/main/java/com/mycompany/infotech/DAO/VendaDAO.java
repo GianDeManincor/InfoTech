@@ -19,14 +19,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Classe que possui os metodos de manipulação de dados da tela de vendas
  * @author Gian
  */
 public class VendaDAO {
     
     GerenciadorConexao conexao = new GerenciadorConexao();
     
-    
+    /**
+     * método para salvar o pedido com os itens no banco de dados
+     * @param pedido Pedido para salvar no banco de dados
+     * @return true e se houver um erro <b>false</b>
+     */
     public boolean salvar(Pedido pedido){
         
         Connection conexao = null;
@@ -103,6 +107,11 @@ public class VendaDAO {
         return retorno;
     }
     
+    /**
+     * método para pesquisar o Produto no banco de dados
+     * @param nomeProduto nome do Produto que sera pesquisado
+     * @return ArrayList Produto e se houver um erro <b>ArrayList vazio</b>
+     */
     public ArrayList<Produto> pesquisarProduto(String nomeProduto){
         
         Connection conexao = null;
